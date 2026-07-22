@@ -7,6 +7,7 @@ import './index.css'
 import { Layout } from '@/components/Layout'
 import App from './App.tsx'
 import EncodeDecodePage from '@/tools/encode-decode/index.tsx'
+import QRCodePage from '@/tools/qrcode/index.tsx'
 
 const router = createHashRouter([
   {
@@ -19,6 +20,10 @@ const router = createHashRouter([
       {
         path: "/tools/encode-decode",
         element: <EncodeDecodePage />,
+      },
+      {
+        path: "/tools/qrcode",
+        element: <QRCodePage />,
       },
     ],
   },

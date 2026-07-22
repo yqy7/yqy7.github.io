@@ -29,6 +29,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      easyqrcodejs:
+        specifier: ^4.6.2
+        version: 4.6.2
       lucide-react:
         specifier: ^1.25.0
         version: 1.25.0(react@19.2.7)
@@ -976,6 +979,9 @@ packages:
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
     engines: {node: '>= 0.4'}
+
+  easyqrcodejs@4.6.2:
+    resolution: {integrity: sha512-BrNtC0bavgqh5MIJb8Naj6dELykz+1s1XNVBeGrMzYKfdTiSN08U6V1GgNHsLQWe4QuijmXypq5USCFeXYLBRw==}
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -2884,6 +2890,8 @@ snapshots:
       call-bind-apply-helpers: 1.0.2
       es-errors: 1.3.0
       gopd: 1.2.0
+
+  easyqrcodejs@4.6.2: {}
 
   ee-first@1.1.1: {}
 
