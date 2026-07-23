@@ -89,18 +89,15 @@ export function Navbar() {
             <NavigationMenuItem>
               <NavigationMenuLink
                 render={(props) => (
-                  <NavLink
-                    {...props}
-                    to="/about"
-                    className={({ isActive }) =>
-                      cn(
+                  <a
+                    href="https://github.com/yqy7/myblog/"
+                    target="_blank"
+                    className={cn(
                         navigationMenuTriggerStyle(),
-                        isActive && "bg-muted",
-                      )
-                    }
+                    )}
                   >
-                    关于
-                  </NavLink>
+                    博客
+                  </a>
                 )}
               />
             </NavigationMenuItem>
@@ -111,7 +108,7 @@ export function Navbar() {
           href="https://github.com/yqy7"
           target="_blank"
           rel="noopener noreferrer"
-          className="ml-auto inline-flex items-center gap-1.5 p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          className="ml-auto inline-flex items-center gap-1.5 p-2 transition-colors hover:bg-accent hover:text-accent-foreground"
         >
           <GitHubIcon className="size-4" />
           <span className="text-sm font-medium">GitHub</span>
