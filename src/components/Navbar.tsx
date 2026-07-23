@@ -88,7 +88,7 @@ export function Navbar() {
 
             <NavigationMenuItem>
               <NavigationMenuLink
-                render={(props) => (
+                render={() => (
                   <a
                     href="https://github.com/yqy7/myblog/"
                     target="_blank"
