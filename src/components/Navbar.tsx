@@ -13,6 +13,7 @@ import {
 const toolsLinks = [
   { to: "/tools/encode-decode", label: "编解码" },
   { to: "/tools/qrcode", label: "二维码" },
+  { to: "/tools/opencc", label: "简繁转换" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {
