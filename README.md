@@ -1,34 +1,20 @@
-# React + TypeScript + Vite
+# YQY7
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+主页 [https://yqy7.github.io/](https://yqy7.github.io/)
 
-Currently, two official plugins are available:
+## 工具列表
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
-
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+| 工具 | 链接 |
+|---|---|
+| 编解码 | [查看](https://yqy7.github.io/#/tools/encode-decode) |
+| 二维码生成器 | [查看](https://yqy7.github.io/#/tools/qrcode) |
+| 简繁转换 | [查看](https://yqy7.github.io/#/tools/opencc) |
+| 汉字转拼音 | [查看](https://yqy7.github.io/#/tools/pinyin) |
+| 密码生成器 | [查看](https://yqy7.github.io/#/tools/password) |
+| 随机数生成器 | [查看](https://yqy7.github.io/#/tools/random-number) |
+| 进制转换 | [查看](https://yqy7.github.io/#/tools/base-convert) |
+| UUID 生成器 | [查看](https://yqy7.github.io/#/tools/uuid) |
+| 摩斯电码 | [查看](https://yqy7.github.io/#/tools/morse) |
+| 命名转换 | [查看](https://yqy7.github.io/#/tools/name-case) |
+| 颜色转换 | [查看](https://yqy7.github.io/#/tools/color-convert) |
+| Crontab 计算 | [查看](https://yqy7.github.io/#/tools/crontab) |
