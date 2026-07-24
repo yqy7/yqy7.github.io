@@ -20,6 +20,9 @@ const toolsLinks = [
   { to: "/tools/base-convert", label: "进制转换" },
   { to: "/tools/uuid", label: "UUID 生成" },
   { to: "/tools/morse", label: "摩斯电码" },
+  { to: "/tools/name-case", label: "命名转换" },
+  { to: "/tools/color-convert", label: "颜色转换" },
+  { to: "/tools/crontab", label: "Crontab 计算" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {

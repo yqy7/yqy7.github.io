@@ -58,6 +58,24 @@ const tools = [
     desc: "文字与摩斯电码互转，支持中文，可自定义长短符号",
     icon: "📡",
   },
+  {
+    to: "/tools/name-case",
+    title: "命名转换",
+    desc: "camelCase / PascalCase / snake_case / kebab-case 等命名风格互转",
+    icon: "✍️",
+  },
+  {
+    to: "/tools/color-convert",
+    title: "颜色转换",
+    desc: "HEX / RGB / HSL / HSV 颜色格式互转，支持透明度",
+    icon: "🎨",
+  },
+  {
+    to: "/tools/crontab",
+    title: "Crontab 计算",
+    desc: "计算 cron 表达式未来 N 次执行时间，支持 Linux / Spring / Quartz 格式",
+    icon: "⏰",
+  },
 ]
 
 function App() {

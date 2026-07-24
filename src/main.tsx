@@ -15,6 +15,9 @@ import RandomNumberPage from '@/tools/random-number/index.tsx'
 import BaseConvertPage from '@/tools/base-convert/index.tsx'
 import UUIDPage from '@/tools/uuid/index.tsx'
 import MorsePage from '@/tools/morse/index.tsx'
+import NameCasePage from '@/tools/name-case/index.tsx'
+import ColorConvertPage from '@/tools/color-convert/index.tsx'
+import CrontabPage from '@/tools/crontab/index.tsx'
 
 const router = createHashRouter([
   {
@@ -59,6 +62,18 @@ const router = createHashRouter([
       {
         path: "/tools/morse",
         element: <MorsePage />,
+      },
+      {
+        path: "/tools/name-case",
+        element: <NameCasePage />,
+      },
+      {
+        path: "/tools/color-convert",
+        element: <ColorConvertPage />,
+      },
+      {
+        path: "/tools/crontab",
+        element: <CrontabPage />,
       },
     ],
   },
