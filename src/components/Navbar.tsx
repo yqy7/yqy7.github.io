@@ -16,6 +16,7 @@ const toolsLinks = [
   { to: "/tools/opencc", label: "简繁转换" },
   { to: "/tools/pinyin", label: "汉字转拼音" },
   { to: "/tools/password", label: "密码生成器" },
+  { to: "/tools/random-number", label: "随机数生成" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {

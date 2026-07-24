@@ -34,6 +34,12 @@ const tools = [
     desc: "加密安全随机密码生成，支持自定义字符集和前后缀",
     icon: "🔑",
   },
+  {
+    to: "/tools/random-number",
+    title: "随机数生成器",
+    desc: "指定范围生成随机数，支持去重、排序、补零、自定义分隔符",
+    icon: "🎲",
+  },
 ]
 
 function App() {

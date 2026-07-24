@@ -11,6 +11,7 @@ import QRCodePage from '@/tools/qrcode/index.tsx'
 import OpenCCPage from '@/tools/opencc/index.tsx'
 import PinyinPage from '@/tools/pinyin/index.tsx'
 import PasswordPage from '@/tools/password/index.tsx'
+import RandomNumberPage from '@/tools/random-number/index.tsx'
 
 const router = createHashRouter([
   {
@@ -39,6 +40,10 @@ const router = createHashRouter([
       {
         path: "/tools/password",
         element: <PasswordPage />,
+      },
+      {
+        path: "/tools/random-number",
+        element: <RandomNumberPage />,
       },
     ],
   },
