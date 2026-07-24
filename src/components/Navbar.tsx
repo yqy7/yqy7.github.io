@@ -23,6 +23,9 @@ const toolsLinks = [
   { to: "/tools/name-case", label: "命名转换" },
   { to: "/tools/color-convert", label: "颜色转换" },
   { to: "/tools/crontab", label: "Crontab 计算" },
+  { to: "/tools/json-yaml", label: "JSON ⇄ YAML" },
+  { to: "/tools/chinese-number", label: "中文数字" },
+  { to: "/tools/fancy-text", label: "花体英文" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {

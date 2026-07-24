@@ -76,6 +76,24 @@ const tools = [
     desc: "计算 cron 表达式未来 N 次执行时间，支持 Linux / Spring / Quartz 格式",
     icon: "⏰",
   },
+  {
+    to: "/tools/json-yaml",
+    title: "JSON ⇄ YAML",
+    desc: "JSON 与 YAML 格式相互转换，支持复杂嵌套结构",
+    icon: "🔄",
+  },
+  {
+    to: "/tools/chinese-number",
+    title: "中文数字转换",
+    desc: "阿拉伯数字与中文数字互转，支持简体、繁体、大小写",
+    icon: "🀄",
+  },
+  {
+    to: "/tools/fancy-text",
+    title: "花体英文转换",
+    desc: "将普通文字转为 19 种 Unicode 花体风格，支持装饰线",
+    icon: "💫",
+  },
 ]
 
 function App() {

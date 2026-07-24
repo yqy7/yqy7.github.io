@@ -18,6 +18,9 @@ import MorsePage from '@/tools/morse/index.tsx'
 import NameCasePage from '@/tools/name-case/index.tsx'
 import ColorConvertPage from '@/tools/color-convert/index.tsx'
 import CrontabPage from '@/tools/crontab/index.tsx'
+import JsonYamlPage from '@/tools/json-yaml/index.tsx'
+import ChineseNumberPage from '@/tools/chinese-number/index.tsx'
+import FancyTextPage from '@/tools/fancy-text/index.tsx'
 
 const router = createHashRouter([
   {
@@ -74,6 +77,18 @@ const router = createHashRouter([
       {
         path: "/tools/crontab",
         element: <CrontabPage />,
+      },
+      {
+        path: "/tools/json-yaml",
+        element: <JsonYamlPage />,
+      },
+      {
+        path: "/tools/chinese-number",
+        element: <ChineseNumberPage />,
+      },
+      {
+        path: "/tools/fancy-text",
+        element: <FancyTextPage />,
       },
     ],
   },

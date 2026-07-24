@@ -18,3 +18,6 @@
 | 命名转换 | [查看](https://yqy7.github.io/#/tools/name-case) |
 | 颜色转换 | [查看](https://yqy7.github.io/#/tools/color-convert) |
 | Crontab 计算 | [查看](https://yqy7.github.io/#/tools/crontab) |
+| JSON ⇄ YAML | [查看](https://yqy7.github.io/#/tools/json-yaml) |
+| 中文数字转换 | [查看](https://yqy7.github.io/#/tools/chinese-number) |
+| 花体英文转换 | [查看](https://yqy7.github.io/#/tools/fancy-text) |
