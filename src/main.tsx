@@ -9,6 +9,7 @@ import App from './App.tsx'
 import EncodeDecodePage from '@/tools/encode-decode/index.tsx'
 import QRCodePage from '@/tools/qrcode/index.tsx'
 import OpenCCPage from '@/tools/opencc/index.tsx'
+import PinyinPage from '@/tools/pinyin/index.tsx'
 
 const router = createHashRouter([
   {
@@ -29,6 +30,10 @@ const router = createHashRouter([
       {
         path: "/tools/opencc",
         element: <OpenCCPage />,
+      },
+      {
+        path: "/tools/pinyin",
+        element: <PinyinPage />,
       },
     ],
   },

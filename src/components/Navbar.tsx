@@ -14,6 +14,7 @@ const toolsLinks = [
   { to: "/tools/encode-decode", label: "编解码" },
   { to: "/tools/qrcode", label: "二维码" },
   { to: "/tools/opencc", label: "简繁转换" },
+  { to: "/tools/pinyin", label: "汉字转拼音" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {

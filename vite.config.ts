@@ -15,6 +15,8 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      // pinyin 的 browser 字段指向 UMD，强制用 ESM
+      pinyin: path.resolve(__dirname, './node_modules/pinyin/lib/esm/pinyin.js'),
     },
   },
 })

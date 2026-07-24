@@ -21,6 +21,7 @@
     "easyqrcodejs": "^4.6.2",
     "lucide-react": "^1.25.0",
     "opencc-js": "^1.4.1",
+    "pinyin": "^4.0.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router": "^8.2.0",
