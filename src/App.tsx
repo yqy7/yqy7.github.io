@@ -40,6 +40,24 @@ const tools = [
     desc: "指定范围生成随机数，支持去重、排序、补零、自定义分隔符",
     icon: "🎲",
   },
+  {
+    to: "/tools/base-convert",
+    title: "进制转换",
+    desc: "2/8/10/12/16 进制实时互转，任意输入框输入即可同步",
+    icon: "🔢",
+  },
+  {
+    to: "/tools/uuid",
+    title: "UUID 生成器",
+    desc: "生成 UUID v4，支持自定义数量、去掉连字符、大小写切换",
+    icon: "🆔",
+  },
+  {
+    to: "/tools/morse",
+    title: "摩斯电码",
+    desc: "文字与摩斯电码互转，支持中文，可自定义长短符号",
+    icon: "📡",
+  },
 ]
 
 function App() {

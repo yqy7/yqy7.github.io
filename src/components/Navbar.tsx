@@ -17,6 +17,9 @@ const toolsLinks = [
   { to: "/tools/pinyin", label: "汉字转拼音" },
   { to: "/tools/password", label: "密码生成器" },
   { to: "/tools/random-number", label: "随机数生成" },
+  { to: "/tools/base-convert", label: "进制转换" },
+  { to: "/tools/uuid", label: "UUID 生成" },
+  { to: "/tools/morse", label: "摩斯电码" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {

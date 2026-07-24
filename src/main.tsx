@@ -12,6 +12,9 @@ import OpenCCPage from '@/tools/opencc/index.tsx'
 import PinyinPage from '@/tools/pinyin/index.tsx'
 import PasswordPage from '@/tools/password/index.tsx'
 import RandomNumberPage from '@/tools/random-number/index.tsx'
+import BaseConvertPage from '@/tools/base-convert/index.tsx'
+import UUIDPage from '@/tools/uuid/index.tsx'
+import MorsePage from '@/tools/morse/index.tsx'
 
 const router = createHashRouter([
   {
@@ -44,6 +47,18 @@ const router = createHashRouter([
       {
         path: "/tools/random-number",
         element: <RandomNumberPage />,
+      },
+      {
+        path: "/tools/base-convert",
+        element: <BaseConvertPage />,
+      },
+      {
+        path: "/tools/uuid",
+        element: <UUIDPage />,
+      },
+      {
+        path: "/tools/morse",
+        element: <MorsePage />,
       },
     ],
   },
