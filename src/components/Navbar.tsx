@@ -15,6 +15,7 @@ const toolsLinks = [
   { to: "/tools/qrcode", label: "二维码" },
   { to: "/tools/opencc", label: "简繁转换" },
   { to: "/tools/pinyin", label: "汉字转拼音" },
+  { to: "/tools/password", label: "密码生成器" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {

@@ -10,6 +10,7 @@ import EncodeDecodePage from '@/tools/encode-decode/index.tsx'
 import QRCodePage from '@/tools/qrcode/index.tsx'
 import OpenCCPage from '@/tools/opencc/index.tsx'
 import PinyinPage from '@/tools/pinyin/index.tsx'
+import PasswordPage from '@/tools/password/index.tsx'
 
 const router = createHashRouter([
   {
@@ -34,6 +35,10 @@ const router = createHashRouter([
       {
         path: "/tools/pinyin",
         element: <PinyinPage />,
+      },
+      {
+        path: "/tools/password",
+        element: <PasswordPage />,
       },
     ],
   },
