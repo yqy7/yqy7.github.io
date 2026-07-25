@@ -31,6 +31,10 @@ const toolsLinks = [
   { to: "/tools/unicode", label: "Unicode 编解码" },
   { to: "/tools/zero-width", label: "文字隐写" },
   { to: "/tools/animal-speak", label: "兽言兽语" },
+  { to: "/tools/text-diff", label: "文本对比" },
+  { to: "/tools/word-count", label: "字数统计" },
+  { to: "/tools/json-formatter", label: "JSON 格式化" },
+  { to: "/tools/martian-text", label: "火星文转换" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {

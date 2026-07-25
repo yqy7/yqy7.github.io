@@ -124,6 +124,30 @@ const tools = [
     desc: "用自定义字符对文字编码，像动物的语言一样",
     icon: "🐾",
   },
+  {
+    to: "/tools/text-diff",
+    title: "文本对比",
+    desc: "对比两段文本的差异，支持按行、按词、按字符三种模式",
+    icon: "📋",
+  },
+  {
+    to: "/tools/word-count",
+    title: "字数统计",
+    desc: "统计汉字、英文、数字、标点等各类字符数量",
+    icon: "📊",
+  },
+  {
+    to: "/tools/json-formatter",
+    title: "JSON 格式化",
+    desc: "JSON 格式化、压缩、转义和去除转义，支持自定义缩进",
+    icon: "📦",
+  },
+  {
+    to: "/tools/martian-text",
+    title: "火星文转换",
+    desc: "简体中文与火星文（吙煋呅）相互转换",
+    icon: "👽",
+  },
 ]
 
 function App() {

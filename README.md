@@ -26,3 +26,7 @@
 | Unicode 编解码 | [查看](https://yqy7.github.io/#/tools/unicode) |
 | 文字隐写 | [查看](https://yqy7.github.io/#/tools/zero-width) |
 | 兽言兽语 | [查看](https://yqy7.github.io/#/tools/animal-speak) |
+| 文本对比 | [查看](https://yqy7.github.io/#/tools/text-diff) |
+| 字数统计 | [查看](https://yqy7.github.io/#/tools/word-count) |
+| JSON 格式化 | [查看](https://yqy7.github.io/#/tools/json-formatter) |
+| 火星文转换 | [查看](https://yqy7.github.io/#/tools/martian-text) |

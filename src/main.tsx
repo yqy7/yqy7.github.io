@@ -26,6 +26,10 @@ import DeviceInfoPage from '@/tools/device-info/index.tsx'
 import UnicodePage from '@/tools/unicode/index.tsx'
 import ZeroWidthPage from '@/tools/zero-width/index.tsx'
 import AnimalSpeakPage from '@/tools/animal-speak/index.tsx'
+import TextDiffPage from '@/tools/text-diff/index.tsx'
+import WordCountPage from '@/tools/word-count/index.tsx'
+import JsonFormatterPage from '@/tools/json-formatter/index.tsx'
+import MartianTextPage from '@/tools/martian-text/index.tsx'
 
 const router = createHashRouter([
   {
@@ -114,6 +118,22 @@ const router = createHashRouter([
       {
         path: "/tools/animal-speak",
         element: <AnimalSpeakPage />,
+      },
+      {
+        path: "/tools/text-diff",
+        element: <TextDiffPage />,
+      },
+      {
+        path: "/tools/word-count",
+        element: <WordCountPage />,
+      },
+      {
+        path: "/tools/json-formatter",
+        element: <JsonFormatterPage />,
+      },
+      {
+        path: "/tools/martian-text",
+        element: <MartianTextPage />,
       },
     ],
   },

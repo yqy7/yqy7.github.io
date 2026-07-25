@@ -32,9 +32,18 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      cnchar:
+        specifier: ^3.2.6
+        version: 3.2.6
+      cnchar-trad:
+        specifier: ^3.2.6
+        version: 3.2.6
       cron-parser:
         specifier: ^5.6.2
         version: 5.6.2
+      diff:
+        specifier: ^9.0.0
+        version: 9.0.0
       easyqrcodejs:
         specifier: ^4.6.2
         version: 4.6.2
@@ -93,6 +102,9 @@ importers:
       '@types/babel__core':
         specifier: ^7.20.5
         version: 7.20.5
+      '@types/diff':
+        specifier: ^8.0.0
+        version: 8.0.0
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
@@ -747,6 +759,10 @@ packages:
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
 
+  '@types/diff@8.0.0':
+    resolution: {integrity: sha512-o7jqJM04gfaYrdCecCVMbZhNdG6T1MHg/oQoRFdERLV+4d+V7FijhiEAbFu0Usww84Yijk9yH58U4Jk4HbtzZw==}
+    deprecated: This is a stub types definition. diff provides its own type definitions, so you do not need this installed.
+
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
@@ -934,6 +950,15 @@ packages:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
 
+  cnchar-trad@3.2.6:
+    resolution: {integrity: sha512-xdQUwd+W7j4i4vD1c6ykgwuzNExBZrakrmi/5c6ODclyGgEb7QcBKGta7v9WewNhauLHUkTpeMR4AERoBhs3NQ==}
+
+  cnchar-types@3.2.6:
+    resolution: {integrity: sha512-LGU2ss7KcsI1Psme73+jffUX0ZDuChr6P9Rj2j8lynJHStklNpoC/+kheKSSUcXQ1u2KNvZt1Shs/5efcihHkg==}
+
+  cnchar@3.2.6:
+    resolution: {integrity: sha512-7Up5ALAkoOTAHlRMN0B7VgrrRsp6+trgFV0M7xSsZ0TwnnBfW68gXClcE9Oz8sTOEu+zqGOZjBhlHNzPIBckDA==}
+
   code-block-writer@13.0.3:
     resolution: {integrity: sha512-Oofo0pq3IKnsFtuHqSF7TqBfr71aeyZDVJ0HpmqB7FBM2qEigL0iPONSCZSO9pE9dZTAxANe5XHG9Uy0YMv8cg==}
 
@@ -1059,6 +1084,10 @@ packages:
 
   diff@8.0.4:
     resolution: {integrity: sha512-DPi0FmjiSU5EvQV0++GFDOJ9ASQUVFh5kD+OzOnYdi7n3Wpm9hWWGfB/O2blfHcMVTL5WkQXSnRiK9makhrcnw==}
+    engines: {node: '>=0.3.1'}
+
+  diff@9.0.0:
+    resolution: {integrity: sha512-svtcdpS8CgJyqAjEQIXdb3OjhFVVYjzGAPO8WGCmRbrml64SPw/jJD4GoE98aR7r25A0XcgrK3F02yw9R/vhQw==}
     engines: {node: '>=0.3.1'}
 
   dot-prop@6.0.1:
@@ -2891,6 +2920,10 @@ snapshots:
 
   '@types/deep-eql@4.0.2': {}
 
+  '@types/diff@8.0.0':
+    dependencies:
+      diff: 9.0.0
+
   '@types/estree@1.0.9': {}
 
   '@types/js-yaml@4.0.9': {}
@@ -3068,6 +3101,16 @@ snapshots:
 
   clsx@2.1.1: {}
 
+  cnchar-trad@3.2.6:
+    dependencies:
+      cnchar-types: 3.2.6
+
+  cnchar-types@3.2.6: {}
+
+  cnchar@3.2.6:
+    dependencies:
+      cnchar-types: 3.2.6
+
   code-block-writer@13.0.3: {}
 
   commander@1.1.1:
@@ -3161,6 +3204,8 @@ snapshots:
   detect-libc@2.1.2: {}
 
   diff@8.0.4: {}
+
+  diff@9.0.0: {}
 
   dot-prop@6.0.1:
     dependencies:
