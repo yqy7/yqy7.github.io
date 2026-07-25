@@ -12,29 +12,29 @@ import {
 
 const toolsLinks = [
   { to: "/tools/encode-decode", label: "编解码" },
-  { to: "/tools/qrcode", label: "二维码" },
+  { to: "/tools/unicode", label: "Unicode 编解码" },
+  { to: "/tools/base-convert", label: "进制转换" },
+  { to: "/tools/morse", label: "摩斯电码" },
+  { to: "/tools/animal-speak", label: "兽言兽语" },
+  { to: "/tools/martian-text", label: "火星文转换" },
   { to: "/tools/opencc", label: "简繁转换" },
   { to: "/tools/pinyin", label: "汉字转拼音" },
-  { to: "/tools/password", label: "密码生成器" },
-  { to: "/tools/random-number", label: "随机数生成" },
-  { to: "/tools/base-convert", label: "进制转换" },
-  { to: "/tools/uuid", label: "UUID 生成" },
-  { to: "/tools/morse", label: "摩斯电码" },
-  { to: "/tools/name-case", label: "命名转换" },
-  { to: "/tools/color-convert", label: "颜色转换" },
-  { to: "/tools/crontab", label: "Crontab 计算" },
-  { to: "/tools/json-yaml", label: "JSON ⇄ YAML" },
   { to: "/tools/chinese-number", label: "中文数字" },
   { to: "/tools/fancy-text", label: "花体英文" },
-  { to: "/tools/tts", label: "文字转语音" },
-  { to: "/tools/device-info", label: "设备信息" },
-  { to: "/tools/unicode", label: "Unicode 编解码" },
-  { to: "/tools/zero-width", label: "文字隐写" },
-  { to: "/tools/animal-speak", label: "兽言兽语" },
+  { to: "/tools/name-case", label: "命名转换" },
+  { to: "/tools/color-convert", label: "颜色转换" },
+  { to: "/tools/json-formatter", label: "JSON 格式化" },
+  { to: "/tools/json-yaml", label: "JSON ⇄ YAML" },
+  { to: "/tools/password", label: "密码生成器" },
+  { to: "/tools/random-number", label: "随机数生成" },
+  { to: "/tools/uuid", label: "UUID 生成" },
   { to: "/tools/text-diff", label: "文本对比" },
   { to: "/tools/word-count", label: "字数统计" },
-  { to: "/tools/json-formatter", label: "JSON 格式化" },
-  { to: "/tools/martian-text", label: "火星文转换" },
+  { to: "/tools/zero-width", label: "文字隐写" },
+  { to: "/tools/qrcode", label: "二维码" },
+  { to: "/tools/tts", label: "文字转语音" },
+  { to: "/tools/crontab", label: "Crontab 计算" },
+  { to: "/tools/device-info", label: "设备信息" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {
@@ -123,11 +123,27 @@ export function Navbar() {
                 )}
               />
             </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                render={() => (
+                  <a
+                    href="https://github.com/yqy7"
+                    target="_blank"
+                    className={cn(
+                        navigationMenuTriggerStyle(),
+                    )}
+                  >
+                    关于
+                  </a>
+                )}
+              />
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
 
         <a
-          href="https://github.com/yqy7"
+          href="https://github.com/yqy7/yqy7.github.io"
           target="_blank"
           rel="noopener noreferrer"
           className="ml-auto inline-flex items-center gap-1.5 p-2 transition-colors hover:bg-accent hover:text-accent-foreground"
