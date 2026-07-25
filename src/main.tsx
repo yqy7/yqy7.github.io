@@ -21,6 +21,11 @@ import CrontabPage from '@/tools/crontab/index.tsx'
 import JsonYamlPage from '@/tools/json-yaml/index.tsx'
 import ChineseNumberPage from '@/tools/chinese-number/index.tsx'
 import FancyTextPage from '@/tools/fancy-text/index.tsx'
+import TTSPage from '@/tools/tts/index.tsx'
+import DeviceInfoPage from '@/tools/device-info/index.tsx'
+import UnicodePage from '@/tools/unicode/index.tsx'
+import ZeroWidthPage from '@/tools/zero-width/index.tsx'
+import AnimalSpeakPage from '@/tools/animal-speak/index.tsx'
 
 const router = createHashRouter([
   {
@@ -89,6 +94,26 @@ const router = createHashRouter([
       {
         path: "/tools/fancy-text",
         element: <FancyTextPage />,
+      },
+      {
+        path: "/tools/tts",
+        element: <TTSPage />,
+      },
+      {
+        path: "/tools/device-info",
+        element: <DeviceInfoPage />,
+      },
+      {
+        path: "/tools/unicode",
+        element: <UnicodePage />,
+      },
+      {
+        path: "/tools/zero-width",
+        element: <ZeroWidthPage />,
+      },
+      {
+        path: "/tools/animal-speak",
+        element: <AnimalSpeakPage />,
       },
     ],
   },

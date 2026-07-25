@@ -26,6 +26,11 @@ const toolsLinks = [
   { to: "/tools/json-yaml", label: "JSON ⇄ YAML" },
   { to: "/tools/chinese-number", label: "中文数字" },
   { to: "/tools/fancy-text", label: "花体英文" },
+  { to: "/tools/tts", label: "文字转语音" },
+  { to: "/tools/device-info", label: "设备信息" },
+  { to: "/tools/unicode", label: "Unicode 编解码" },
+  { to: "/tools/zero-width", label: "文字隐写" },
+  { to: "/tools/animal-speak", label: "兽言兽语" },
 ]
 
 function GitHubIcon({ className }: { className?: string }) {

@@ -21,3 +21,8 @@
 | JSON ⇄ YAML | [查看](https://yqy7.github.io/#/tools/json-yaml) |
 | 中文数字转换 | [查看](https://yqy7.github.io/#/tools/chinese-number) |
 | 花体英文转换 | [查看](https://yqy7.github.io/#/tools/fancy-text) |
+| 文字转语音 | [查看](https://yqy7.github.io/#/tools/tts) |
+| 设备信息 | [查看](https://yqy7.github.io/#/tools/device-info) |
+| Unicode 编解码 | [查看](https://yqy7.github.io/#/tools/unicode) |
+| 文字隐写 | [查看](https://yqy7.github.io/#/tools/zero-width) |
+| 兽言兽语 | [查看](https://yqy7.github.io/#/tools/animal-speak) |

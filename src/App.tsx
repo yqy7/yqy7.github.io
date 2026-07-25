@@ -94,6 +94,36 @@ const tools = [
     desc: "将普通文字转为 19 种 Unicode 花体风格，支持装饰线",
     icon: "💫",
   },
+  {
+    to: "/tools/tts",
+    title: "文字转语音",
+    desc: "浏览器内置 TTS 引擎朗读文字，支持多语音和语速调节",
+    icon: "🔊",
+  },
+  {
+    to: "/tools/device-info",
+    title: "设备信息",
+    desc: "查看浏览器和系统信息，UA、屏幕、GPU、电池、权限等",
+    icon: "🖥",
+  },
+  {
+    to: "/tools/unicode",
+    title: "Unicode 编解码",
+    desc: "文字与 \\u、&#x、U+、%XX 等 Unicode 转义序列互转",
+    icon: "🔣",
+  },
+  {
+    to: "/tools/zero-width",
+    title: "文字隐写",
+    desc: "用零宽字符在普通文本中隐藏秘密，肉眼不可见",
+    icon: "👻",
+  },
+  {
+    to: "/tools/animal-speak",
+    title: "兽言兽语",
+    desc: "用自定义字符对文字编码，像动物的语言一样",
+    icon: "🐾",
+  },
 ]
 
 function App() {
