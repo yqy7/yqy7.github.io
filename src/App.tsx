@@ -41,6 +41,12 @@ const tools = [
     icon: "👽",
   },
   {
+    to: "/tools/lucky-wheel",
+    title: "转盘随机选",
+    desc: "自定义选项，随机选出一个结果",
+    icon: "🎡",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

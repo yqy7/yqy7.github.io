@@ -30,6 +30,7 @@ import TextDiffPage from '@/tools/text-diff/index.tsx'
 import WordCountPage from '@/tools/word-count/index.tsx'
 import JsonFormatterPage from '@/tools/json-formatter/index.tsx'
 import MartianTextPage from '@/tools/martian-text/index.tsx'
+import LuckyWheelPage from '@/tools/lucky-wheel/index.tsx'
 
 const router = createHashRouter([
   {
@@ -134,6 +135,10 @@ const router = createHashRouter([
       {
         path: "/tools/martian-text",
         element: <MartianTextPage />,
+      },
+      {
+        path: "/tools/lucky-wheel",
+        element: <LuckyWheelPage />,
       },
     ],
   },
