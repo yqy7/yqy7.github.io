@@ -47,6 +47,18 @@ const tools = [
     icon: "🎡",
   },
   {
+    to: "/tools/random-name",
+    title: "随机名称生成",
+    desc: "随机生成中文姓名和昵称，支持多种风格和语言",
+    icon: "📛",
+  },
+  {
+    to: "/tools/identity",
+    title: "虚拟身份生成",
+    desc: "随机生成完整的虚拟身份信息，包括姓名、身份证、地址、电话等",
+    icon: "🪪",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

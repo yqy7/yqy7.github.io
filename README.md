@@ -13,6 +13,8 @@
 | 兽言兽语 | [查看](https://yqy7.github.io/#/tools/animal-speak) |
 | 火星文转换 | [查看](https://yqy7.github.io/#/tools/martian-text) |
 | 转盘随机选 | [查看](https://yqy7.github.io/#/tools/lucky-wheel) |
+| 随机名称生成 | [查看](https://yqy7.github.io/#/tools/random-name) |
+| 虚拟身份生成 | [查看](https://yqy7.github.io/#/tools/identity) |
 | 简繁转换 | [查看](https://yqy7.github.io/#/tools/opencc) |
 | 汉字转拼音 | [查看](https://yqy7.github.io/#/tools/pinyin) |
 | 中文数字转换 | [查看](https://yqy7.github.io/#/tools/chinese-number) |

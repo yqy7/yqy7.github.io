@@ -11,6 +11,9 @@ importers:
       '@base-ui/react':
         specifier: ^1.6.0
         version: 1.6.0(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      '@faker-js/faker':
+        specifier: ^10.5.0
+        version: 10.5.0
       '@fingerprintjs/fingerprintjs':
         specifier: ^5.2.0
         version: 5.2.0
@@ -86,6 +89,9 @@ importers:
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
+      wg-random-name:
+        specifier: ^1.0.3
+        version: 1.0.3
       xmorse:
         specifier: ^1.0.0
         version: 1.0.0
@@ -313,6 +319,10 @@ packages:
 
   '@emnapi/wasi-threads@1.2.2':
     resolution: {integrity: sha512-c95qOXkHdydNKhscBTebqEC1CVAZpyqOfVfBzQ1qgzyl3gfeldUjIggDbIZgDKsHLgnsM+igH7TJ/eAasaVuMA==}
+
+  '@faker-js/faker@10.5.0':
+    resolution: {integrity: sha512-bsxD8WLS5lIj7aaoCx1YJkktqYj5vlBUE6HWzu2Q51ksrGJ0H737ECCKlFU7Yf8Br45z9t99frBp/J7kzbMPAg==}
+    engines: {node: ^20.19.0 || ^22.13.0 || ^23.5.0 || >=24.0.0, npm: '>=10'}
 
   '@fingerprintjs/fingerprintjs@5.2.0':
     resolution: {integrity: sha512-j+2nInkwCQNTJcNhOjvkGM/nLRTuGJTC6xai4quqvUpjob2ssrGwBZjS7k55nOmKvge7qvJT2nS3i/IRvQSTQA==}
@@ -2287,6 +2297,9 @@ packages:
       jsdom:
         optional: true
 
+  wg-random-name@1.0.3:
+    resolution: {integrity: sha512-LXBEm0GfWDESHVXRJhgqJR3zVqn95W564x091B2mkxw8ROM2p091LgisD18bDb9kBspyvKSAFoovCqAjqgV2bA==}
+
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
@@ -2598,6 +2611,8 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
+
+  '@faker-js/faker@10.5.0': {}
 
   '@fingerprintjs/fingerprintjs@5.2.0': {}
 
@@ -4259,6 +4274,8 @@ snapshots:
       '@types/node': 24.13.3
     transitivePeerDependencies:
       - msw
+
+  wg-random-name@1.0.3: {}
 
   which@2.0.2:
     dependencies:
