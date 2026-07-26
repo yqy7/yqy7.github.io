@@ -222,10 +222,28 @@ function formatCSV(identities: Identity[]): string {
 
 const MAX_COUNT = 100
 
+// ── 数据表格列定义 ──────────────────────────────────────────
+
+const TABLE_COLS: { key: keyof Identity; label: string }[] = [
+  { key: "nameCN", label: "姓名" },
+  { key: "genderCN", label: "性别" },
+  { key: "age", label: "年龄" },
+  { key: "birthDate", label: "出生日期" },
+  { key: "idNumber", label: "身份证号" },
+  { key: "phone", label: "手机号码" },
+  { key: "email", label: "邮箱" },
+  { key: "address", label: "地址" },
+  { key: "company", label: "工作单位" },
+  { key: "jobTitle", label: "职位" },
+]
+
+// ── 页面组件 ──────────────────────────────────────────────────
+
 export default function IdentityPage() {
   const [identities, setIdentities] = useState<Identity[]>(() => [generateIdentity()])
   const [count, setCount] = useState(1)
   const [genderFilter, setGenderFilter] = useState<"random" | "male" | "female">("random")
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
   const handleGenerate = useCallback(() => {
     const gender = genderFilter === "random" ? undefined : genderFilter
@@ -234,9 +252,10 @@ export default function IdentityPage() {
       list.push(generateIdentity(gender))
     }
     setIdentities(list)
+    setSelectedIndex(0)
   }, [count, genderFilter])
 
-  const preview = identities[0]
+  const preview = identities[selectedIndex] ?? identities[0]
   const isBatch = identities.length > 1
 
   const copyAll = async () => {
@@ -254,7 +273,7 @@ export default function IdentityPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl space-y-6 px-4 py-8">
+    <div className="mx-auto max-w-5xl space-y-6 px-4 py-8">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">虚拟身份生成</h1>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -316,18 +335,18 @@ export default function IdentityPage() {
         </Button>
       </div>
 
-      {/* 批量提示 */}
-      {isBatch && (
-        <p className="text-sm text-muted-foreground">
-          已生成 {identities.length} 条身份数据，下方为第 1 条预览。点击「复制为 JSON」或「复制为 CSV」导出全部数据。
-        </p>
-      )}
-
       {/* 身份卡片 */}
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
-            <CardTitle>身份信息</CardTitle>
+            <CardTitle>
+              身份信息
+              {isBatch && (
+                <span className="ml-2 text-base font-normal text-muted-foreground">
+                  第 {selectedIndex + 1}/{identities.length} 条
+                </span>
+              )}
+            </CardTitle>
             <CardDescription>点击任意字段值即可单独复制</CardDescription>
           </div>
           <Button variant="ghost" size="sm" onClick={copyAll}>
@@ -344,6 +363,60 @@ export default function IdentityPage() {
                 mono={key === "idNumber" || key === "phone" || key === "email"}
               />
             ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 数据表格 */}
+      <Card>
+        <CardHeader>
+          <CardTitle>
+            数据预览
+            <span className="ml-2 text-base font-normal text-muted-foreground">
+              共 {identities.length} 条
+            </span>
+          </CardTitle>
+          <CardDescription>点击任意行切换上方详情，横向滚动查看更多列</CardDescription>
+        </CardHeader>
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-border bg-muted/50">
+                  <th className="sticky left-0 z-10 bg-muted/50 px-3 py-2.5 text-left font-medium whitespace-nowrap">
+                    #
+                  </th>
+                  {TABLE_COLS.map((col) => (
+                    <th
+                      key={col.key}
+                      className="px-3 py-2.5 text-left font-medium whitespace-nowrap"
+                    >
+                      {col.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {identities.map((id, idx) => (
+                  <tr
+                    key={idx}
+                    className={`cursor-pointer border-b border-border transition-colors hover:bg-muted/30 ${
+                      idx === selectedIndex ? "bg-muted/50" : ""
+                    }`}
+                    onClick={() => setSelectedIndex(idx)}
+                  >
+                    <td className="sticky left-0 z-10 bg-inherit px-3 py-2 text-muted-foreground whitespace-nowrap">
+                      {idx + 1}
+                    </td>
+                    {TABLE_COLS.map((col) => (
+                      <td key={col.key} className="max-w-48 truncate px-3 py-2 whitespace-nowrap">
+                        {id[col.key]}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </CardContent>
       </Card>
