@@ -59,6 +59,12 @@ const tools = [
     icon: "🪪",
   },
   {
+    to: "/tools/barcode",
+    title: "条形码生成器",
+    desc: "在线生成条形码，支持 CODE128、EAN、UPC 等多种编码格式",
+    icon: "📊",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

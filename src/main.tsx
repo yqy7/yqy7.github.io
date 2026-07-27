@@ -33,6 +33,7 @@ import MartianTextPage from '@/tools/martian-text/index.tsx'
 import LuckyWheelPage from '@/tools/lucky-wheel/index.tsx'
 import RandomNamePage from '@/tools/random-name/index.tsx'
 import IdentityPage from '@/tools/identity/index.tsx'
+import BarcodePage from '@/tools/barcode/index.tsx'
 
 const router = createHashRouter([
   {
@@ -149,6 +150,10 @@ const router = createHashRouter([
       {
         path: "/tools/identity",
         element: <IdentityPage />,
+      },
+      {
+        path: "/tools/barcode",
+        element: <BarcodePage />,
       },
     ],
   },

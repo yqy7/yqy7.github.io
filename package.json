@@ -27,6 +27,7 @@
     "diff": "^9.0.0",
     "easyqrcodejs": "^4.6.2",
     "js-yaml": "^5.2.2",
+    "jsbarcode": "^3.12.3",
     "lucide-react": "^1.25.0",
     "nzh": "^1.0.14",
     "opencc-js": "^1.4.1",
