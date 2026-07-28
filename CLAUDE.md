@@ -94,3 +94,7 @@ resolve: {
 - 每个工具页面自包含，不跨目录引用其他工具的实现细节
 - `src/tools/encode-decode/utils.ts` 中的 `computeHash`（MD5/SHA）是公共工具函数，可跨工具引用
 - 文本区域统一样式：输入 `border border-border bg-transparent`，输出 `border border-border bg-muted/50`
+
+## 强制规则
+
+- **禁止擅自创建新功能**：只有在用户明确提出需求时才能新建工具页面、安装 npm 包或添加功能代码。不要主动「预判」或「联想」下一步工作。上一次任务完成后，若用户没有新指令，就停下来等待。
