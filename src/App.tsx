@@ -65,6 +65,12 @@ const tools = [
     icon: "📊",
   },
   {
+    to: "/tools/ocr",
+    title: "图片文字识别",
+    desc: "上传图片或粘贴截图，识别提取其中的文字内容",
+    icon: "🔍",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

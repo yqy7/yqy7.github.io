@@ -34,6 +34,7 @@ import LuckyWheelPage from '@/tools/lucky-wheel/index.tsx'
 import RandomNamePage from '@/tools/random-name/index.tsx'
 import IdentityPage from '@/tools/identity/index.tsx'
 import BarcodePage from '@/tools/barcode/index.tsx'
+import OCRPage from '@/tools/ocr/index.tsx'
 
 const router = createHashRouter([
   {
@@ -154,6 +155,10 @@ const router = createHashRouter([
       {
         path: "/tools/barcode",
         element: <BarcodePage />,
+      },
+      {
+        path: "/tools/ocr",
+        element: <OCRPage />,
       },
     ],
   },
