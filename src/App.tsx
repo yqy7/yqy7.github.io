@@ -71,6 +71,18 @@ const tools = [
     icon: "🔍",
   },
   {
+    to: "/tools/sql-formatter",
+    title: "SQL 格式化",
+    desc: "SQL 语句美化与格式化，支持 19 种数据库方言",
+    icon: "🗃",
+  },
+  {
+    to: "/tools/color-extractor",
+    title: "图片取色",
+    desc: "上传图片提取主色调和配色方案，点击色块即可复制",
+    icon: "🎨",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

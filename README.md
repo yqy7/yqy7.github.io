@@ -17,6 +17,8 @@
 | 虚拟身份生成 | [查看](https://yqy7.github.io/#/tools/identity) |
 | 条形码生成器 | [查看](https://yqy7.github.io/#/tools/barcode) |
 | 图片文字识别 | [查看](https://yqy7.github.io/#/tools/ocr) |
+| SQL 格式化 | [查看](https://yqy7.github.io/#/tools/sql-formatter) |
+| 图片取色 | [查看](https://yqy7.github.io/#/tools/color-extractor) |
 | 简繁转换 | [查看](https://yqy7.github.io/#/tools/opencc) |
 | 汉字转拼音 | [查看](https://yqy7.github.io/#/tools/pinyin) |
 | 中文数字转换 | [查看](https://yqy7.github.io/#/tools/chinese-number) |

@@ -22,6 +22,8 @@ const toolsLinks = [
   { to: "/tools/identity", label: "虚拟身份" },
   { to: "/tools/barcode", label: "条形码" },
   { to: "/tools/ocr", label: "图片文字识别" },
+  { to: "/tools/sql-formatter", label: "SQL 格式化" },
+  { to: "/tools/color-extractor", label: "图片取色" },
   { to: "/tools/opencc", label: "简繁转换" },
   { to: "/tools/pinyin", label: "汉字转拼音" },
   { to: "/tools/chinese-number", label: "中文数字" },

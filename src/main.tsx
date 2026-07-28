@@ -35,6 +35,8 @@ import RandomNamePage from '@/tools/random-name/index.tsx'
 import IdentityPage from '@/tools/identity/index.tsx'
 import BarcodePage from '@/tools/barcode/index.tsx'
 import OCRPage from '@/tools/ocr/index.tsx'
+import SQLFormatterPage from '@/tools/sql-formatter/index.tsx'
+import ColorExtractorPage from '@/tools/color-extractor/index.tsx'
 
 const router = createHashRouter([
   {
@@ -159,6 +161,14 @@ const router = createHashRouter([
       {
         path: "/tools/ocr",
         element: <OCRPage />,
+      },
+      {
+        path: "/tools/sql-formatter",
+        element: <SQLFormatterPage />,
+      },
+      {
+        path: "/tools/color-extractor",
+        element: <ColorExtractorPage />,
       },
     ],
   },
