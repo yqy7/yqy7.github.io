@@ -37,6 +37,7 @@ import BarcodePage from '@/tools/barcode/index.tsx'
 import OCRPage from '@/tools/ocr/index.tsx'
 import SQLFormatterPage from '@/tools/sql-formatter/index.tsx'
 import ColorExtractorPage from '@/tools/color-extractor/index.tsx'
+import BgRemovePage from '@/tools/bg-remove/index.tsx'
 
 const router = createHashRouter([
   {
@@ -169,6 +170,10 @@ const router = createHashRouter([
       {
         path: "/tools/color-extractor",
         element: <ColorExtractorPage />,
+      },
+      {
+        path: "/tools/bg-remove",
+        element: <BgRemovePage />,
       },
     ],
   },

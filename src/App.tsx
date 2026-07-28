@@ -83,6 +83,12 @@ const tools = [
     icon: "🎨",
   },
   {
+    to: "/tools/bg-remove",
+    title: "图片去背景",
+    desc: "AI 本地处理，上传图片自动去除背景，不上传服务器",
+    icon: "✂️",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",
