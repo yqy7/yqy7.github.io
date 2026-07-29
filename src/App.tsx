@@ -95,6 +95,12 @@ const tools = [
   //   icon: "🔮",
   // },
   {
+    to: "/tools/qrcode-scanner",
+    title: "二维码识别",
+    desc: "上传图片或开启摄像头，识别并解码二维码内容",
+    icon: "📷",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

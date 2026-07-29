@@ -39,6 +39,7 @@ import SQLFormatterPage from '@/tools/sql-formatter/index.tsx'
 import ColorExtractorPage from '@/tools/color-extractor/index.tsx'
 import BgRemovePage from '@/tools/bg-remove/index.tsx'
 import BaZiPage from '@/tools/ba-zi/index.tsx'
+import QRCodeScannerPage from '@/tools/qrcode-scanner/index.tsx'
 
 const router = createHashRouter([
   {
@@ -179,6 +180,10 @@ const router = createHashRouter([
       {
         path: "/tools/ba-zi",
         element: <BaZiPage />,
+      },
+      {
+        path: "/tools/qrcode-scanner",
+        element: <QRCodeScannerPage />,
       },
     ],
   },

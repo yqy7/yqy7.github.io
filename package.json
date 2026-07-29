@@ -30,6 +30,7 @@
     "easyqrcodejs": "^4.6.2",
     "js-yaml": "^5.2.2",
     "jsbarcode": "^3.12.3",
+    "jsqr": "^1.4.0",
     "lucide-react": "^1.25.0",
     "nzh": "^1.0.14",
     "onnxruntime-web": "^1.21.0",
