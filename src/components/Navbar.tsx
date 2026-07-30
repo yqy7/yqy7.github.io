@@ -25,7 +25,7 @@ const toolsLinks = [
   { to: "/tools/sql-formatter", label: "SQL 格式化" },
   { to: "/tools/color-extractor", label: "图片取色" },
   { to: "/tools/bg-remove", label: "图片去背景" },
-  // { to: "/tools/ba-zi", label: "AI 算八字" },
+
   { to: "/tools/qrcode-scanner", label: "二维码识别" },
   { to: "/tools/opencc", label: "简繁转换" },
   { to: "/tools/pinyin", label: "汉字转拼音" },

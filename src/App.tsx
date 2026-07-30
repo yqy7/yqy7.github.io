@@ -88,12 +88,7 @@ const tools = [
     desc: "AI 本地处理，上传图片自动去除背景，不上传服务器",
     icon: "✂️",
   },
-  // {
-  //   to: "/tools/ba-zi",
-  //   title: "AI 算八字",
-  //   desc: "输入出生日期和时辰，AI 为您分析八字命理",
-  //   icon: "🔮",
-  // },
+
   {
     to: "/tools/qrcode-scanner",
     title: "二维码识别",
