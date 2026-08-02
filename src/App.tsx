@@ -96,6 +96,12 @@ const tools = [
     icon: "📷",
   },
   {
+    to: "/tools/pixel-art",
+    title: "图片像素画",
+    desc: "将图片转换为像素风格，支持调节像素大小和调色板",
+    icon: "🎮",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

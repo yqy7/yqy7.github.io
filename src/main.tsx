@@ -40,6 +40,7 @@ import ColorExtractorPage from '@/tools/color-extractor/index.tsx'
 import BgRemovePage from '@/tools/bg-remove/index.tsx'
 
 import QRCodeScannerPage from '@/tools/qrcode-scanner/index.tsx'
+import PixelArtPage from '@/tools/pixel-art/index.tsx'
 
 const router = createHashRouter([
   {
@@ -181,6 +182,10 @@ const router = createHashRouter([
       {
         path: "/tools/qrcode-scanner",
         element: <QRCodeScannerPage />,
+      },
+      {
+        path: "/tools/pixel-art",
+        element: <PixelArtPage />,
       },
     ],
   },
