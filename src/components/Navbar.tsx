@@ -28,6 +28,7 @@ const toolsLinks = [
 
   { to: "/tools/qrcode-scanner", label: "二维码识别" },
   { to: "/tools/pixel-art", label: "图片像素画" },
+  { to: "/tools/chinese-color", label: "中国传统颜色" },
   { to: "/tools/opencc", label: "简繁转换" },
   { to: "/tools/pinyin", label: "汉字转拼音" },
   { to: "/tools/chinese-number", label: "中文数字" },

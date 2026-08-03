@@ -102,6 +102,12 @@ const tools = [
     icon: "🎮",
   },
   {
+    to: "/tools/chinese-color",
+    title: "中国传统颜色",
+    desc: "二十四节气 · 384 种中国传统颜色，含诗词典故",
+    icon: "🏮",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",
