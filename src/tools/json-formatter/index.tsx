@@ -2,22 +2,72 @@ import { useState, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
-function formatJSON(input: string, indent: number): string {
-  const obj = JSON.parse(input)
-  return JSON.stringify(obj, null, indent)
+/** 去除 JSON 注释（JSONC），跳过字符串内的注释符号 */
+function stripComments(json: string): string {
+  let inString = false
+  let escaped = false
+  let result = ""
+  let i = 0
+  while (i < json.length) {
+    const ch = json[i]
+    const next = json[i + 1]
+
+    if (inString) {
+      result += ch
+      if (escaped) {
+        escaped = false
+      } else if (ch === "\\") {
+        escaped = true
+      } else if (ch === '"') {
+        inString = false
+      }
+      i++
+      continue
+    }
+
+    if (ch === '"') {
+      inString = true
+      result += ch
+      i++
+      continue
+    }
+    if (ch === "/" && next === "/") {
+      // 行注释：跳到换行
+      while (i < json.length && json[i] !== "\n") i++
+      i++
+      continue
+    }
+    if (ch === "/" && next === "*") {
+      // 块注释：跳到 */
+      i += 2
+      while (i < json.length && !(json[i] === "*" && json[i + 1] === "/")) i++
+      i += 2
+      continue
+    }
+    result += ch
+    i++
+  }
+  return result
 }
 
-function compressJSON(input: string): string {
-  const obj = JSON.parse(input)
-  return JSON.stringify(obj)
+function parseInput(input: string, allowComments: boolean): unknown {
+  return JSON.parse(allowComments ? stripComments(input) : input)
+}
+
+function formatJSON(input: string, indent: number, allowComments: boolean): string {
+  return JSON.stringify(parseInput(input, allowComments), null, indent)
+}
+
+function compressJSON(input: string, allowComments: boolean): string {
+  return JSON.stringify(parseInput(input, allowComments))
 }
 
 function escapeJSON(input: string): string {
   return JSON.stringify(input)
 }
 
-function unescapeJSON(input: string): string {
-  const result = JSON.parse(input)
+function unescapeJSON(input: string, allowComments: boolean): string {
+  const result = parseInput(input, allowComments)
   // 如果是字符串直接返回，否则格式化回 JSON
   return typeof result === "string" ? result : JSON.stringify(result, null, 2)
 }
@@ -25,27 +75,28 @@ function unescapeJSON(input: string): string {
 export default function JsonFormatterPage() {
   const [input, setInput] = useState("")
   const [indent, setIndent] = useState(2)
+  const [allowComments, setAllowComments] = useState(false)
   const [error, setError] = useState("")
 
   const handleFormat = useCallback(() => {
     setError("")
     if (!input.trim()) return
     try {
-      setInput(formatJSON(input, indent))
+      setInput(formatJSON(input, indent, allowComments))
     } catch (e) {
       setError(e instanceof Error ? e.message : "格式错误")
     }
-  }, [input, indent])
+  }, [input, indent, allowComments])
 
   const handleCompress = useCallback(() => {
     setError("")
     if (!input.trim()) return
     try {
-      setInput(compressJSON(input))
+      setInput(compressJSON(input, allowComments))
     } catch (e) {
       setError(e instanceof Error ? e.message : "格式错误")
     }
-  }, [input])
+  }, [input, allowComments])
 
   const handleEscape = useCallback(() => {
     setError("")
@@ -61,11 +112,11 @@ export default function JsonFormatterPage() {
     setError("")
     if (!input.trim()) return
     try {
-      setInput(unescapeJSON(input))
+      setInput(unescapeJSON(input, allowComments))
     } catch (e) {
       setError(e instanceof Error ? e.message : "去除转义失败")
     }
-  }, [input])
+  }, [input, allowComments])
 
   return (
     <div className="mx-auto max-w-3xl space-y-6 px-4 py-8">
@@ -114,6 +165,17 @@ export default function JsonFormatterPage() {
               ))}
             </div>
           </div>
+
+          {/* 兼容注释 */}
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={allowComments}
+              onChange={() => setAllowComments((v) => !v)}
+              className="accent-foreground size-4"
+            />
+            兼容注释（JSONC）
+          </label>
 
           {/* 按钮 */}
           <div className="grid grid-cols-2 gap-2">
