@@ -42,6 +42,7 @@ import BgRemovePage from '@/tools/bg-remove/index.tsx'
 import QRCodeScannerPage from '@/tools/qrcode-scanner/index.tsx'
 import PixelArtPage from '@/tools/pixel-art/index.tsx'
 import ChineseColorPage from '@/tools/chinese-color/index.tsx'
+import WatermarkPage from '@/tools/watermark/index.tsx'
 
 const router = createHashRouter([
   {
@@ -191,6 +192,10 @@ const router = createHashRouter([
       {
         path: "/tools/chinese-color",
         element: <ChineseColorPage />,
+      },
+      {
+        path: "/tools/watermark",
+        element: <WatermarkPage />,
       },
     ],
   },

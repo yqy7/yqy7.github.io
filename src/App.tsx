@@ -108,6 +108,12 @@ const tools = [
     icon: "🏮",
   },
   {
+    to: "/tools/watermark",
+    title: "图片加水印",
+    desc: "上传图片添加文字水印，支持调节透明度、方向和位置",
+    icon: "💧",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

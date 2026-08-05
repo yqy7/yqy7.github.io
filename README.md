@@ -23,6 +23,7 @@
 | 二维码识别 | [查看](https://yqy7.github.io/#/tools/qrcode-scanner) |
 | 图片像素画 | [查看](https://yqy7.github.io/#/tools/pixel-art) |
 | 中国传统颜色 | [查看](https://yqy7.github.io/#/tools/chinese-color) |
+| 图片加水印 | [查看](https://yqy7.github.io/#/tools/watermark) |
 | 简繁转换 | [查看](https://yqy7.github.io/#/tools/opencc) |
 | 汉字转拼音 | [查看](https://yqy7.github.io/#/tools/pinyin) |
 | 中文数字转换 | [查看](https://yqy7.github.io/#/tools/chinese-number) |
