@@ -114,6 +114,12 @@ const tools = [
     icon: "💧",
   },
   {
+    to: "/tools/image-compress",
+    title: "图片压缩",
+    desc: "在线压缩图片，支持质量调节和 JPEG/WebP/PNG 格式转换",
+    icon: "🗜",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

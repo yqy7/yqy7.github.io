@@ -30,6 +30,7 @@ const toolsLinks = [
   { to: "/tools/pixel-art", label: "图片像素画" },
   { to: "/tools/chinese-color", label: "中国传统颜色" },
   { to: "/tools/watermark", label: "图片加水印" },
+  { to: "/tools/image-compress", label: "图片压缩" },
   { to: "/tools/opencc", label: "简繁转换" },
   { to: "/tools/pinyin", label: "汉字转拼音" },
   { to: "/tools/chinese-number", label: "中文数字" },
