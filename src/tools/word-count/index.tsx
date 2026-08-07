@@ -38,6 +38,11 @@ export default function WordCountPage() {
     // 空格：ASCII 空白字符
     const spaceCount = (text.match(/[  　\t\n\r]/g) ?? []).length
 
+    // 行数：空文本为 0 行，否则按换行符拆分
+    const lineCount = text === "" ? 0 : text.split("\n").length
+    // 非空行：去除首尾空白后非空的行
+    const nonEmptyLineCount = text.split("\n").filter((l) => l.trim() !== "").length
+
     // 其他：不在以上任何分类中的字符
     let otherCount = total
     const counted = new Set<number>()
@@ -55,6 +60,8 @@ export default function WordCountPage() {
 
     return [
       { label: "总字符数", value: total, highlight: true },
+      { label: "行数", value: lineCount },
+      { label: "非空行", value: nonEmptyLineCount },
       { label: "汉字", value: hanziCount },
       { label: "中文标点符号", value: cnPunctCount },
       { label: "汉字 + 中文标点", value: cnTotal, highlight: true },
