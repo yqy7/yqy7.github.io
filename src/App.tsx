@@ -126,6 +126,12 @@ const tools = [
     icon: "⏱",
   },
   {
+    to: "/tools/crop",
+    title: "图片裁剪",
+    desc: "拖拽缩放调整裁剪区域，支持多种宽高比",
+    icon: "✂️",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

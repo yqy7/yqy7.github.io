@@ -32,6 +32,7 @@ const toolsLinks = [
   { to: "/tools/watermark", label: "图片加水印" },
   { to: "/tools/image-compress", label: "图片压缩" },
   { to: "/tools/timestamp", label: "时间戳转换" },
+  { to: "/tools/crop", label: "图片裁剪" },
   { to: "/tools/opencc", label: "简繁转换" },
   { to: "/tools/pinyin", label: "汉字转拼音" },
   { to: "/tools/chinese-number", label: "中文数字" },

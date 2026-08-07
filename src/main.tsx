@@ -45,6 +45,7 @@ import ChineseColorPage from '@/tools/chinese-color/index.tsx'
 import WatermarkPage from '@/tools/watermark/index.tsx'
 import ImageCompressPage from '@/tools/image-compress/index.tsx'
 import TimestampPage from '@/tools/timestamp/index.tsx'
+import CropPage from '@/tools/crop/index.tsx'
 
 const router = createHashRouter([
   {
@@ -206,6 +207,10 @@ const router = createHashRouter([
       {
         path: "/tools/timestamp",
         element: <TimestampPage />,
+      },
+      {
+        path: "/tools/crop",
+        element: <CropPage />,
       },
     ],
   },
