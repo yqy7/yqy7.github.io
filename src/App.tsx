@@ -120,6 +120,12 @@ const tools = [
     icon: "🗜",
   },
   {
+    to: "/tools/timestamp",
+    title: "时间戳转换",
+    desc: "时间戳与日期时间互转，支持多时区选择",
+    icon: "⏱",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

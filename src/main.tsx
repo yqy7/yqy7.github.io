@@ -44,6 +44,7 @@ import PixelArtPage from '@/tools/pixel-art/index.tsx'
 import ChineseColorPage from '@/tools/chinese-color/index.tsx'
 import WatermarkPage from '@/tools/watermark/index.tsx'
 import ImageCompressPage from '@/tools/image-compress/index.tsx'
+import TimestampPage from '@/tools/timestamp/index.tsx'
 
 const router = createHashRouter([
   {
@@ -201,6 +202,10 @@ const router = createHashRouter([
       {
         path: "/tools/image-compress",
         element: <ImageCompressPage />,
+      },
+      {
+        path: "/tools/timestamp",
+        element: <TimestampPage />,
       },
     ],
   },
