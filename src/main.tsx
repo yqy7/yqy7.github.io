@@ -46,6 +46,7 @@ import WatermarkPage from '@/tools/watermark/index.tsx'
 import ImageCompressPage from '@/tools/image-compress/index.tsx'
 import TimestampPage from '@/tools/timestamp/index.tsx'
 import CropPage from '@/tools/crop/index.tsx'
+import ResizePage from '@/tools/resize/index.tsx'
 
 const router = createHashRouter([
   {
@@ -211,6 +212,10 @@ const router = createHashRouter([
       {
         path: "/tools/crop",
         element: <CropPage />,
+      },
+      {
+        path: "/tools/resize",
+        element: <ResizePage />,
       },
     ],
   },

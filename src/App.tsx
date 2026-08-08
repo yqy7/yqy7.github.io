@@ -132,6 +132,12 @@ const tools = [
     icon: "✂️",
   },
   {
+    to: "/tools/resize",
+    title: "图片尺寸调整",
+    desc: "按像素精确调整图片宽高，支持保持宽高比",
+    icon: "📐",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",
