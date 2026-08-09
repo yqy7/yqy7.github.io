@@ -1,6 +1,13 @@
 # YQY7
+## 在线版
+工具箱主页 [https://yqy7.github.io/](https://yqy7.github.io/)
 
-主页 [https://yqy7.github.io/](https://yqy7.github.io/)
+## 离线客户端版
+使用 tauri 开发，可以从 Releases 中下载对应平台的安装包。
+```bash
+# macos 中安装权限问题解决
+xattr -cr /Applications/yqy7-tools.app/
+```
 
 ## 工具列表
 
