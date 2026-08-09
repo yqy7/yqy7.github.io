@@ -1,5 +1,6 @@
 import { NavLink } from "react-router"
 import { cn } from "@/lib/utils"
+import { isTauri } from "@/lib/platform"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -125,49 +126,55 @@ export function Navbar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                render={() => (
-                  <a
-                    href="https://github.com/yqy7/myblog/"
-                    target="_blank"
-                    className={cn(
-                        navigationMenuTriggerStyle(),
-                    )}
-                  >
-                    博客
-                  </a>
-                )}
-              />
-            </NavigationMenuItem>
+            {!isTauri && (
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  render={() => (
+                    <a
+                      href="https://github.com/yqy7/myblog/"
+                      target="_blank"
+                      className={cn(
+                          navigationMenuTriggerStyle(),
+                      )}
+                    >
+                      博客
+                    </a>
+                  )}
+                />
+              </NavigationMenuItem>
+            )}
 
-            <NavigationMenuItem>
-              <NavigationMenuLink
-                render={() => (
-                  <a
-                    href="https://github.com/yqy7"
-                    target="_blank"
-                    className={cn(
-                        navigationMenuTriggerStyle(),
-                    )}
-                  >
-                    关于
-                  </a>
-                )}
-              />
-            </NavigationMenuItem>
+            {!isTauri && (
+              <NavigationMenuItem>
+                <NavigationMenuLink
+                  render={() => (
+                    <a
+                      href="https://github.com/yqy7"
+                      target="_blank"
+                      className={cn(
+                          navigationMenuTriggerStyle(),
+                      )}
+                    >
+                      关于
+                    </a>
+                  )}
+                />
+              </NavigationMenuItem>
+            )}
           </NavigationMenuList>
         </NavigationMenu>
 
-        <a
-          href="https://github.com/yqy7/yqy7.github.io"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="ml-auto inline-flex items-center gap-1.5 p-2 transition-colors hover:bg-accent hover:text-accent-foreground"
-        >
-          <GitHubIcon className="size-4" />
-          <span className="text-sm font-medium">GitHub</span>
-        </a>
+        {!isTauri && (
+          <a
+            href="https://github.com/yqy7/yqy7.github.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-auto inline-flex items-center gap-1.5 p-2 transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            <GitHubIcon className="size-4" />
+            <span className="text-sm font-medium">GitHub</span>
+          </a>
+        )}
       </div>
     </header>
   )
