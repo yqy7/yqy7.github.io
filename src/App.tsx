@@ -138,6 +138,12 @@ const tools = [
     icon: "📐",
   },
   {
+    to: "/tools/blur",
+    title: "图片打码",
+    desc: "框选区域应用马赛克、模糊或纯色遮盖",
+    icon: "🙈",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",

@@ -35,6 +35,7 @@ xattr -cr /Applications/yqy7-tools.app/
 | 时间戳转换 | [查看](https://yqy7.github.io/#/tools/timestamp) |
 | 图片裁剪 | [查看](https://yqy7.github.io/#/tools/crop) |
 | 图片尺寸调整 | [查看](https://yqy7.github.io/#/tools/resize) |
+| 图片打码 | [查看](https://yqy7.github.io/#/tools/blur) |
 | 简繁转换 | [查看](https://yqy7.github.io/#/tools/opencc) |
 | 汉字转拼音 | [查看](https://yqy7.github.io/#/tools/pinyin) |
 | 中文数字转换 | [查看](https://yqy7.github.io/#/tools/chinese-number) |

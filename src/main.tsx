@@ -47,6 +47,7 @@ import ImageCompressPage from '@/tools/image-compress/index.tsx'
 import TimestampPage from '@/tools/timestamp/index.tsx'
 import CropPage from '@/tools/crop/index.tsx'
 import ResizePage from '@/tools/resize/index.tsx'
+import BlurPage from '@/tools/blur/index.tsx'
 
 const router = createHashRouter([
   {
@@ -216,6 +217,10 @@ const router = createHashRouter([
       {
         path: "/tools/resize",
         element: <ResizePage />,
+      },
+      {
+        path: "/tools/blur",
+        element: <BlurPage />,
       },
     ],
   },
