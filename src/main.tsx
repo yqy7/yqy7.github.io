@@ -48,6 +48,7 @@ import TimestampPage from '@/tools/timestamp/index.tsx'
 import CropPage from '@/tools/crop/index.tsx'
 import ResizePage from '@/tools/resize/index.tsx'
 import BlurPage from '@/tools/blur/index.tsx'
+import SlicePage from '@/tools/slice/index.tsx'
 
 const router = createHashRouter([
   {
@@ -221,6 +222,10 @@ const router = createHashRouter([
       {
         path: "/tools/blur",
         element: <BlurPage />,
+      },
+      {
+        path: "/tools/slice",
+        element: <SlicePage />,
       },
     ],
   },

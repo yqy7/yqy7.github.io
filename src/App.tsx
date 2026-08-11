@@ -144,6 +144,12 @@ const tools = [
     icon: "🙈",
   },
   {
+    to: "/tools/slice",
+    title: "图片切割",
+    desc: "按行数和列数将图片切割为多块，支持单块或打包下载",
+    icon: "🍰",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",
