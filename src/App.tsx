@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { NavLink } from "react-router"
 import favicon from "./assets/favicon.png"
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -7,13 +8,13 @@ const tools = [
   {
     to: "/tools/encode-decode",
     title: "编解码",
-    desc: "MD5、SHA 系列哈希计算，Base64 / URL / Hex 编解码",
+    desc: "MD5、SHA 系列哈希计算，Base64 / URL / Hex 编码和解码",
     icon: "🔐",
   },
   {
     to: "/tools/unicode",
-    title: "Unicode 编解码",
-    desc: "文字与 \\u、&#x、U+、%XX 等 Unicode 转义序列互转",
+    title: "Unicode 转义",
+    desc: "文字与 \\u、&#x、U+、%XX 等 Unicode 转义序列互转，编码解码",
     icon: "🔣",
   },
   {
@@ -25,13 +26,13 @@ const tools = [
   {
     to: "/tools/morse",
     title: "摩斯电码",
-    desc: "文字与摩斯电码互转，支持中文，可自定义长短符号",
+    desc: "文字与摩斯电码互转，编码和解码，支持中文，可自定义长短符号",
     icon: "📡",
   },
   {
     to: "/tools/animal-speak",
     title: "兽言兽语",
-    desc: "用自定义字符对文字编码",
+    desc: "用自定义字符对文字编码和解码",
     icon: "🐾",
   },
   {
@@ -260,10 +261,19 @@ const tools = [
 ]
 
 function App() {
+  const [query, setQuery] = useState("")
+  const q = query.trim().toLowerCase()
+  const filtered = q
+    ? tools.filter(
+        (t) =>
+          t.title.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q),
+      )
+    : tools
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-12">
       {/* Hero */}
-      <div className="mb-12 text-center">
+      <div className="mb-8 text-center">
         <img
           src={favicon}
           className="mx-auto size-20 object-contain"
@@ -272,23 +282,47 @@ function App() {
         <h1 className="mt-4 font-heading text-3xl font-bold tracking-tight">
           YQY7 工具箱
         </h1>
-        <p className="mt-2 text-muted-foreground">实用的在线小工具集合</p>
+        <p className="mt-2 text-muted-foreground">
+          实用的在线小工具集合，共 {tools.length} 个
+        </p>
+      </div>
+
+      {/* 搜索 */}
+      <div className="mb-6 flex justify-center">
+        <div className="relative w-full max-w-md">
+          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+            🔍
+          </span>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.currentTarget.value)}
+            placeholder="搜索工具名称或功能…"
+            className="w-full rounded-lg border border-border bg-transparent py-2 pl-10 pr-3 text-sm outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring"
+          />
+        </div>
       </div>
 
       {/* 工具入口卡片 */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {tools.map((tool) => (
-          <NavLink key={tool.to} to={tool.to}>
-            <Card className="h-full transition-shadow hover:shadow-md">
-              <CardHeader>
-                <div className="text-2xl">{tool.icon}</div>
-                <CardTitle className="text-lg">{tool.title}</CardTitle>
-                <CardDescription>{tool.desc}</CardDescription>
-              </CardHeader>
-            </Card>
-          </NavLink>
-        ))}
-      </div>
+      {filtered.length > 0 ? (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((tool) => (
+            <NavLink key={tool.to} to={tool.to}>
+              <Card className="h-full transition-shadow hover:shadow-md">
+                <CardHeader>
+                  <div className="text-2xl">{tool.icon}</div>
+                  <CardTitle className="text-lg">{tool.title}</CardTitle>
+                  <CardDescription>{tool.desc}</CardDescription>
+                </CardHeader>
+              </Card>
+            </NavLink>
+          ))}
+        </div>
+      ) : (
+        <div className="py-16 text-center text-sm text-muted-foreground">
+          未找到与「{query}」相关的工具
+        </div>
+      )}
     </div>
   )
 }
