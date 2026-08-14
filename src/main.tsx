@@ -49,6 +49,7 @@ import CropPage from '@/tools/crop/index.tsx'
 import ResizePage from '@/tools/resize/index.tsx'
 import BlurPage from '@/tools/blur/index.tsx'
 import SlicePage from '@/tools/slice/index.tsx'
+import AsciiArtPage from '@/tools/ascii-art/index.tsx'
 
 const router = createHashRouter([
   {
@@ -226,6 +227,10 @@ const router = createHashRouter([
       {
         path: "/tools/slice",
         element: <SlicePage />,
+      },
+      {
+        path: "/tools/ascii-art",
+        element: <AsciiArtPage />,
       },
     ],
   },

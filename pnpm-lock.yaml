@@ -44,6 +44,9 @@ importers:
       '@tauri-apps/plugin-fs':
         specifier: ^2.5.1
         version: 2.5.1
+      asciify-react:
+        specifier: ^1.0.3
+        version: 1.0.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1037,6 +1040,12 @@ packages:
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+
+  asciify-react@1.0.3:
+    resolution: {integrity: sha512-C5nUcBhHP61ZIsIPWNYuYevDLCeFg+GQlYV248RvssDDehMzxXepIr6eNP0OE8giA59OdVpZLQu+PXUzuTjZcA==}
+    peerDependencies:
+      react: '>=17.0.0'
+      react-dom: '>=17.0.0'
 
   assertion-error@2.0.1:
     resolution: {integrity: sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==}
@@ -3457,6 +3466,12 @@ snapshots:
   ansi-regex@6.2.2: {}
 
   argparse@2.0.1: {}
+
+  asciify-react@1.0.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+    dependencies:
+      asciify-react: 'link:'
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
 
   assertion-error@2.0.1: {}
 

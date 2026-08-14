@@ -151,6 +151,12 @@ const tools = [
     icon: "🍰",
   },
   {
+    to: "/tools/ascii-art",
+    title: "ASCII 画",
+    desc: "将图片转换为 ASCII 字符画，支持彩色、二进制字符集和噪波动画",
+    icon: "👾",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",
