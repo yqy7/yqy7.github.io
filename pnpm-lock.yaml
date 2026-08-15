@@ -74,6 +74,9 @@ importers:
       easyqrcodejs:
         specifier: ^4.6.2
         version: 4.6.2
+      figlet:
+        specifier: ^1.11.4
+        version: 1.11.4
       js-yaml:
         specifier: ^5.2.2
         version: 5.2.2
@@ -1429,6 +1432,11 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  figlet@1.11.4:
+    resolution: {integrity: sha512-ZU41480OncL+NVLQrT0GVnbO0COL24sLSrzksioDgunmdJNYEUxhJJZ4Y3x1csN8XXqN5OcCZTLG8lKdquNyfQ==}
+    engines: {node: '>= 17.0.0'}
+    hasBin: true
 
   figures@6.1.0:
     resolution: {integrity: sha512-d+l3qxjSesT4V7v2fh+QnmFnUWv9lSpjarhShNTgBOfA0ttejbQUAlHLitbjkoRiDulW0OPoQPYIGhIC8ohejg==}
@@ -3833,6 +3841,10 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.5):
     optionalDependencies:
       picomatch: 4.0.5
+
+  figlet@1.11.4:
+    dependencies:
+      commander: 14.0.3
 
   figures@6.1.0:
     dependencies:

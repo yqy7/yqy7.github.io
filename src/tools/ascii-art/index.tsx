@@ -4,6 +4,46 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { imageToAscii, renderFrame, frameToString } from "asciify-react"
 import type { AsciiFrame } from "asciify-react"
 
+// ── figlet（动态加载）─────────────────────────────────────────
+
+/** 可选的艺术字字体（路径均不含空格，兼容各类 bundler） */
+const FIGLET_FONTS = [
+  { name: "Standard", label: "标准" },
+  { name: "Big", label: "大字" },
+  { name: "Slant", label: "斜体" },
+  { name: "Small", label: "小字" },
+  { name: "Banner3", label: "横幅" },
+  { name: "Banner3-D", label: "3D" },
+] as const
+
+/** figlet 用到的最小接口（避免依赖其未导出的内部类型） */
+interface Figlet {
+  parseFont: (name: string, font: string) => void
+  textSync: (text: string, options?: { font?: string }) => string
+}
+
+let figletPromise: Promise<Figlet> | null = null
+
+/** 按需加载 figlet 核心 + 全部字体并注册（只加载一次） */
+function loadFiglet() {
+  if (!figletPromise) {
+    figletPromise = (async () => {
+      const [{ default: figlet }, ...fontMods] = await Promise.all([
+        import("figlet"),
+        import("figlet/importable-fonts/Standard.js"),
+        import("figlet/importable-fonts/Big.js"),
+        import("figlet/importable-fonts/Slant.js"),
+        import("figlet/importable-fonts/Small.js"),
+        import("figlet/importable-fonts/Banner3.js"),
+        import("figlet/importable-fonts/Banner3-D.js"),
+      ])
+      FIGLET_FONTS.forEach((f, i) => figlet.parseFont(f.name, fontMods[i].default))
+      return figlet as Figlet
+    })()
+  }
+  return figletPromise
+}
+
 /** 将文本渲染为白底黑字位图（支持多行） */
 function renderTextToCanvas(text: string): HTMLCanvasElement {
   const lines = text.split("\n")
@@ -33,6 +73,8 @@ function renderTextToCanvas(text: string): HTMLCanvasElement {
 
 export default function AsciiArtPage() {
   const [mode, setMode] = useState<"image" | "text">("image")
+  const [textStyle, setTextStyle] = useState<"char" | "figlet">("figlet")
+  const [figletFont, setFigletFont] = useState<string>("Standard")
   const [uploadedSrc, setUploadedSrc] = useState<string | null>(null)
   const [uploadedImg, setUploadedImg] = useState<HTMLImageElement | null>(null)
   const [textInput, setTextInput] = useState("YQY7")
@@ -55,6 +97,7 @@ export default function AsciiArtPage() {
 
   // 当前生效的输入图：图片模式用上传图，文本模式用文本位图
   const activeImg = mode === "text" ? textImg : uploadedImg
+  const isFiglet = mode === "text" && textStyle === "figlet"
 
   // 图片加载
   const loadImage = useCallback((file: File) => {
@@ -98,9 +141,9 @@ export default function AsciiArtPage() {
     return () => document.removeEventListener("paste", handler)
   }, [loadImage])
 
-  // 文本 → 位图
+  // 文本 → 位图（字符画样式）
   useEffect(() => {
-    if (mode !== "text") return
+    if (mode !== "text" || textStyle !== "char") return
     if (!textInput.trim()) {
       setTextImg(null)
       setReady(false)
@@ -111,10 +154,37 @@ export default function AsciiArtPage() {
     const img = new Image()
     img.onload = () => setTextImg(img)
     img.src = canvas.toDataURL("image/png")
-  }, [mode, textInput])
+  }, [mode, textStyle, textInput])
 
-  // 转换并渲染
+  // 文本 → figlet 艺术字
   useEffect(() => {
+    if (!isFiglet) return
+    if (!textInput.trim()) {
+      setText("")
+      setReady(false)
+      return
+    }
+    let cancelled = false
+    setReady(false)
+    loadFiglet().then((figlet) => {
+      if (cancelled) return
+      try {
+        const out = figlet.textSync(textInput, { font: figletFont })
+        setText(out)
+        setReady(true)
+      } catch {
+        setText("")
+        setReady(false)
+      }
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [isFiglet, textInput, figletFont])
+
+  // 转换并渲染（图片模式 + 文本字符画模式）
+  useEffect(() => {
+    if (isFiglet) return
     const img = activeImg
     const canvas = canvasRef.current
     if (!img || !canvas) return
@@ -161,9 +231,16 @@ export default function AsciiArtPage() {
       raf = requestAnimationFrame(loop)
       return () => cancelAnimationFrame(raf)
     }
-  }, [activeImg, mode, numCols, charset, color, noiseScale, background, fontSize])
+  }, [activeImg, isFiglet, mode, numCols, charset, color, noiseScale, background, fontSize])
 
   const copyText = async () => {
+    if (isFiglet) {
+      if (!text) return
+      await navigator.clipboard.writeText(text)
+      setCopiedText(true)
+      setTimeout(() => setCopiedText(false), 1500)
+      return
+    }
     const frame = frameRef.current
     if (!frame) return
     try {
@@ -204,7 +281,7 @@ export default function AsciiArtPage() {
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">ASCII 画</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          将图片或文本转换为 ASCII 字符画，支持彩色着色、二进制字符集和噪波动画
+          将图片或文本转换为 ASCII 字符画，支持彩色着色、二进制字符集、艺术字和噪波动画
         </p>
       </div>
 
@@ -271,14 +348,14 @@ export default function AsciiArtPage() {
                 className="w-full resize-y border border-border bg-transparent text-sm outline-none focus-visible:border-ring"
               />
               <p className="mt-2 text-xs text-muted-foreground">
-                文本会渲染为白底黑字位图再转换，支持多行、可实时预览
+                支持多行、可实时预览；字符画样式支持彩色与噪波动画，艺术字样式为经典 FIGfont 大字
               </p>
             </div>
           )}
         </CardContent>
       </Card>
 
-      {(activeImg || (mode === "image" && uploadedSrc)) && (
+      {(activeImg || (mode === "image" && uploadedSrc) || isFiglet) && (
         <>
           {/* 转换设置 */}
           <Card>
@@ -287,95 +364,137 @@ export default function AsciiArtPage() {
               <CardDescription>调节字符精度与显示效果</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center gap-3">
-                <label className="w-20 shrink-0 text-sm text-muted-foreground">字符列数</label>
-                <input
-                  type="range"
-                  min={20}
-                  max={200}
-                  value={numCols}
-                  onChange={(e) => setNumCols(Number(e.currentTarget.value))}
-                  className="min-w-0 flex-1 accent-foreground"
-                />
-                <span className="w-10 text-right font-mono text-sm">{numCols}</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <span className="w-20 shrink-0 text-sm text-muted-foreground">字符集</span>
-                <div className="flex gap-1">
-                  <Button
-                    variant={charset === "english" ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setCharset("english")}
-                  >
-                    字符密度
-                  </Button>
-                  <Button
-                    variant={charset === "binary" ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setCharset("binary")}
-                  >
-                    二进制 0/1
-                  </Button>
+              {/* 文本模式：生成方式 */}
+              {mode === "text" && (
+                <div className="flex items-center gap-3">
+                  <span className="w-20 shrink-0 text-sm text-muted-foreground">生成方式</span>
+                  <div className="flex gap-1">
+                    <Button
+                      variant={textStyle === "figlet" ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setTextStyle("figlet")}
+                    >
+                      艺术字
+                    </Button>
+                    <Button
+                      variant={textStyle === "char" ? "default" : "outline"}
+                      size="sm"
+                      onClick={() => setTextStyle("char")}
+                    >
+                      字符画
+                    </Button>
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {mode === "text" ? (
-                <p className="text-xs text-muted-foreground">
-                  文本模式固定为彩色着色 + 白底黑字，保证文字以密集字符清晰浮现
-                </p>
+              {isFiglet ? (
+                <div className="flex items-center gap-3">
+                  <label className="w-20 shrink-0 text-sm text-muted-foreground">字体</label>
+                  <select
+                    value={figletFont}
+                    onChange={(e) => setFigletFont(e.currentTarget.value)}
+                    className="min-w-0 flex-1 border border-border bg-transparent px-2 py-1 text-sm outline-none focus-visible:border-ring"
+                  >
+                    {FIGLET_FONTS.map((f) => (
+                      <option key={f.name} value={f.name}>
+                        {f.label}（{f.name}）
+                      </option>
+                    ))}
+                  </select>
+                </div>
               ) : (
                 <>
-                  <label className="flex items-center gap-2 text-sm">
-                    <input
-                      type="checkbox"
-                      checked={color}
-                      onChange={() => setColor((v) => !v)}
-                      className="accent-foreground size-4"
-                    />
-                    彩色着色（每个字符使用原图区域的平均颜色）
-                  </label>
                   <div className="flex items-center gap-3">
-                    <label className="w-20 shrink-0 text-sm text-muted-foreground">背景色</label>
+                    <label className="w-20 shrink-0 text-sm text-muted-foreground">字符列数</label>
                     <input
-                      type="color"
-                      value={background}
-                      onChange={(e) => setBackground(e.currentTarget.value)}
-                      className="size-7 cursor-pointer border-0 bg-transparent"
+                      type="range"
+                      min={20}
+                      max={200}
+                      value={numCols}
+                      onChange={(e) => setNumCols(Number(e.currentTarget.value))}
+                      className="min-w-0 flex-1 accent-foreground"
                     />
-                    <span className="font-mono text-xs text-muted-foreground">{background}</span>
+                    <span className="w-10 text-right font-mono text-sm">{numCols}</span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <span className="w-20 shrink-0 text-sm text-muted-foreground">字符集</span>
+                    <div className="flex gap-1">
+                      <Button
+                        variant={charset === "english" ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setCharset("english")}
+                      >
+                        字符密度
+                      </Button>
+                      <Button
+                        variant={charset === "binary" ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => setCharset("binary")}
+                      >
+                        二进制 0/1
+                      </Button>
+                    </div>
+                  </div>
+
+                  {mode === "image" ? (
+                    <>
+                      <label className="flex items-center gap-2 text-sm">
+                        <input
+                          type="checkbox"
+                          checked={color}
+                          onChange={() => setColor((v) => !v)}
+                          className="accent-foreground size-4"
+                        />
+                        彩色着色（每个字符使用原图区域的平均颜色）
+                      </label>
+                      <div className="flex items-center gap-3">
+                        <label className="w-20 shrink-0 text-sm text-muted-foreground">背景色</label>
+                        <input
+                          type="color"
+                          value={background}
+                          onChange={(e) => setBackground(e.currentTarget.value)}
+                          className="size-7 cursor-pointer border-0 bg-transparent"
+                        />
+                        <span className="font-mono text-xs text-muted-foreground">{background}</span>
+                      </div>
+                    </>
+                  ) : (
+                    <p className="text-xs text-muted-foreground">
+                      字符画样式固定为彩色着色 + 白底黑字，保证文字以密集字符清晰浮现
+                    </p>
+                  )}
+
+                  <div className="flex items-center gap-3">
+                    <label className="w-20 shrink-0 text-sm text-muted-foreground">字号</label>
+                    <input
+                      type="range"
+                      min={4}
+                      max={24}
+                      value={fontSize}
+                      onChange={(e) => setFontSize(Number(e.currentTarget.value))}
+                      className="min-w-0 flex-1 accent-foreground"
+                    />
+                    <span className="w-10 text-right font-mono text-sm">{fontSize}px</span>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <label className="w-20 shrink-0 text-sm text-muted-foreground">噪波动画</label>
+                    <input
+                      type="range"
+                      min={0}
+                      max={1}
+                      step={0.05}
+                      value={noiseScale}
+                      onChange={(e) => setNoiseScale(Number(e.currentTarget.value))}
+                      className="min-w-0 flex-1 accent-foreground"
+                    />
+                    <span className="w-10 text-right font-mono text-sm">
+                      {noiseScale === 0 ? "关闭" : noiseScale.toFixed(2)}
+                    </span>
                   </div>
                 </>
               )}
-
-              <div className="flex items-center gap-3">
-                <label className="w-20 shrink-0 text-sm text-muted-foreground">字号</label>
-                <input
-                  type="range"
-                  min={4}
-                  max={24}
-                  value={fontSize}
-                  onChange={(e) => setFontSize(Number(e.currentTarget.value))}
-                  className="min-w-0 flex-1 accent-foreground"
-                />
-                <span className="w-10 text-right font-mono text-sm">{fontSize}px</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <label className="w-20 shrink-0 text-sm text-muted-foreground">噪波动画</label>
-                <input
-                  type="range"
-                  min={0}
-                  max={1}
-                  step={0.05}
-                  value={noiseScale}
-                  onChange={(e) => setNoiseScale(Number(e.currentTarget.value))}
-                  className="min-w-0 flex-1 accent-foreground"
-                />
-                <span className="w-10 text-right font-mono text-sm">
-                  {noiseScale === 0 ? "关闭" : noiseScale.toFixed(2)}
-                </span>
-              </div>
             </CardContent>
           </Card>
 
@@ -385,34 +504,58 @@ export default function AsciiArtPage() {
               <div>
                 <CardTitle>转换预览</CardTitle>
                 <CardDescription>
-                  {info.cols > 0 ? `${info.cols} × ${info.rows} 字符` : "生成中…"}
+                  {isFiglet
+                    ? `${figletFont} 字体 · ${text ? text.split("\n").length : 0} 行`
+                    : info.cols > 0
+                      ? `${info.cols} × ${info.rows} 字符`
+                      : "生成中…"}
                 </CardDescription>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" onClick={copyText} disabled={!ready}>
-                  {copiedText ? "已复制" : "复制文本"}
-                </Button>
-                <Button variant="outline" size="sm" onClick={copyImage} disabled={!ready}>
-                  {copiedImg ? "已复制" : "复制图片"}
-                </Button>
-                <Button variant="outline" size="sm" onClick={download} disabled={!ready}>
-                  下载 PNG
-                </Button>
+                {isFiglet ? (
+                  <Button variant="outline" size="sm" onClick={copyText} disabled={!ready}>
+                    {copiedText ? "已复制" : "复制文本"}
+                  </Button>
+                ) : (
+                  <>
+                    <Button variant="outline" size="sm" onClick={copyText} disabled={!ready}>
+                      {copiedText ? "已复制" : "复制文本"}
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={copyImage} disabled={!ready}>
+                      {copiedImg ? "已复制" : "复制图片"}
+                    </Button>
+                    <Button variant="outline" size="sm" onClick={download} disabled={!ready}>
+                      下载 PNG
+                    </Button>
+                  </>
+                )}
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-center rounded-lg border border-border bg-muted/30 p-3">
-                <canvas ref={canvasRef} className="h-auto max-h-[480px] max-w-full" />
-              </div>
-              {text && (
-                <div>
-                  <p className="mb-1 text-xs text-muted-foreground">纯文本输出（可手动选择复制）</p>
-                  <textarea
-                    readOnly
-                    value={text}
-                    rows={8}
-                    className="w-full resize-y bg-muted/50 font-mono text-xs leading-tight text-foreground"
-                  />
+            <CardContent>
+              {isFiglet ? (
+                text ? (
+                  <div className="overflow-x-auto rounded-lg border border-border bg-muted/50 p-3">
+                    <pre className="font-mono text-xs leading-tight text-foreground">{text}</pre>
+                  </div>
+                ) : (
+                  <div className="py-8 text-center text-sm text-muted-foreground">生成中…</div>
+                )
+              ) : (
+                <div className="space-y-4">
+                  <div className="flex justify-center rounded-lg border border-border bg-muted/30 p-3">
+                    <canvas ref={canvasRef} className="h-auto max-h-[480px] max-w-full" />
+                  </div>
+                  {text && (
+                    <div>
+                      <p className="mb-1 text-xs text-muted-foreground">纯文本输出（可手动选择复制）</p>
+                      <textarea
+                        readOnly
+                        value={text}
+                        rows={8}
+                        className="w-full resize-y bg-muted/50 font-mono text-xs leading-tight text-foreground"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </CardContent>
