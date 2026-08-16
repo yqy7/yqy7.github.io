@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react"
+import { Fireworks } from "fireworks-js"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -155,26 +156,25 @@ function drawCircleImage(
   ctx.stroke()
 }
 
-/** 左右并排显示两张圆形图片（size 圆直径、boxGap 间距、boxX/boxY 位置、viewY 裁剪位置、zoomA/zoomB 两图各自缩放） */
+/** 左右并排显示两张圆形图片（size 圆直径、boxGap 间距、boxY 垂直位置、viewYA/viewYB 两图各自裁剪位置、zoomA/zoomB 两图各自缩放） */
 function drawImagePair(
   ctx: CanvasRenderingContext2D,
   imgA: HTMLImageElement | null,
   imgB: HTMLImageElement | null,
   o: HeartLayout,
-  viewY: number,
+  viewYA: number,
+  viewYB: number,
   boxGap: number,
-  boxX: number,
   boxY: number,
   size: number,
   zoomA: number,
   zoomB: number,
 ) {
   const d = o.heartH * size
-  const cx = o.cx + boxX * o.heartW
   const cy = o.cy + boxY * o.heartH
   const off = boxGap * o.heartW
-  if (imgA) drawCircleImage(ctx, imgA, cx - off, cy, d, viewY, zoomA)
-  if (imgB) drawCircleImage(ctx, imgB, cx + off, cy, d, viewY, zoomB)
+  if (imgA) drawCircleImage(ctx, imgA, o.cx - off, cy, d, viewYA, zoomA)
+  if (imgB) drawCircleImage(ctx, imgB, o.cx + off, cy, d, viewYB, zoomB)
 }
 
 // ── 粒子系统（参考 love.html）─────────────────────────────────
@@ -268,9 +268,9 @@ interface ContentOpts {
   gap: number
   offsetY: number
   fontSize: number
-  imgViewY: number
+  imgViewYA: number
+  imgViewYB: number
   imgGap: number
-  imgBoxX: number
   imgBoxY: number
   imgSize: number
   imgZoomA: number
@@ -293,9 +293,9 @@ function drawContent(ctx: CanvasRenderingContext2D, layout: HeartLayout, opts: C
       opts.imgA,
       opts.imgB,
       layout,
-      opts.imgViewY,
+      opts.imgViewYA,
+      opts.imgViewYB,
       opts.imgGap,
-      opts.imgBoxX,
       opts.imgBoxY,
       opts.imgSize,
       opts.imgZoomA,
@@ -321,16 +321,21 @@ export default function LoveHeartPage() {
   const [gap, setGap] = useState(0.25) // 占心形宽度的比例
   const [offsetY, setOffsetY] = useState(-0.1) // 占心形高度的比例
   const [fontSize, setFontSize] = useState(0.16) // 占心形高度的比例
-  const [imgViewY, setImgViewY] = useState(0) // 裁剪窗口在图片内的垂直位置（人物居中）
+  const [imgViewYA, setImgViewYA] = useState(0) // 左图裁剪窗口的垂直位置（人物居中）
+  const [imgViewYB, setImgViewYB] = useState(0) // 右图裁剪窗口的垂直位置（人物居中）
   const [imgGap, setImgGap] = useState(0.24) // 两个圆形框的间距（占心形宽度）
-  const [imgBoxX, setImgBoxX] = useState(0) // 圆形框整体水平位置（占心形宽度）
-  const [imgBoxY, setImgBoxY] = useState(0) // 圆形框整体垂直位置（占心形高度）
+  const [imgBoxY, setImgBoxY] = useState(-0.15) // 圆形框整体垂直位置（占心形高度）
   const [imgSize, setImgSize] = useState(0.42) // 圆形框直径（占心形高度）
   const [imgZoomA, setImgZoomA] = useState(1) // 左图在框内的缩放（1=填满圆形框）
   const [imgZoomB, setImgZoomB] = useState(1) // 右图在框内的缩放
+  const [fireworks, setFireworks] = useState(false) // 烟花效果（默认不开启）
+  const [fwIntensity, setFwIntensity] = useState(10) // 烟花强度（发射频率）
   const [copied, setCopied] = useState(false)
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const fireworksRef = useRef<HTMLDivElement>(null)
+  const fireworksInstanceRef = useRef<Fireworks | null>(null)
+  const fullscreenRef = useRef<HTMLDivElement>(null)
   const fileARef = useRef<HTMLInputElement>(null)
   const fileBRef = useRef<HTMLInputElement>(null)
   const particlesRef = useRef<Particle[]>([])
@@ -406,9 +411,9 @@ export default function LoveHeartPage() {
         gap,
         offsetY,
         fontSize,
-        imgViewY,
+        imgViewYA,
+        imgViewYB,
         imgGap,
-        imgBoxX,
         imgBoxY,
         imgSize,
         imgZoomA,
@@ -420,19 +425,28 @@ export default function LoveHeartPage() {
 
     raf = requestAnimationFrame(render)
     return () => cancelAnimationFrame(raf)
-  }, [mode, nameA, nameB, imgA, imgB, textColor, gap, offsetY, fontSize, imgViewY, imgGap, imgBoxX, imgBoxY, imgSize, imgZoomA, imgZoomB])
+  }, [mode, nameA, nameB, imgA, imgB, textColor, gap, offsetY, fontSize, imgViewYA, imgViewYB, imgGap, imgBoxY, imgSize, imgZoomA, imgZoomB])
 
-  // 全屏切换：进入时按屏幕尺寸调整画布，退出时恢复 600
+  // 全屏切换：对包裹画布与烟花层的容器全屏（两者一起进入全屏），画布铺满屏幕并跟随屏幕尺寸
   useEffect(() => {
     const onChange = () => {
       const canvas = canvasRef.current
-      if (!canvas) return
-      if (document.fullscreenElement === canvas) {
+      const wrapper = fullscreenRef.current
+      if (!canvas || !wrapper) return
+      if (document.fullscreenElement === wrapper) {
         canvas.width = Math.floor(window.innerWidth)
         canvas.height = Math.floor(window.innerHeight)
+        canvas.style.width = "100vw"
+        canvas.style.height = "100vh"
+        canvas.style.maxWidth = "none"
+        canvas.style.maxHeight = "none"
       } else {
         canvas.width = 600
         canvas.height = 600
+        canvas.style.width = ""
+        canvas.style.height = ""
+        canvas.style.maxWidth = ""
+        canvas.style.maxHeight = ""
       }
     }
     document.addEventListener("fullscreenchange", onChange)
@@ -440,18 +454,42 @@ export default function LoveHeartPage() {
   }, [])
 
   const toggleFullscreen = async () => {
-    const canvas = canvasRef.current
-    if (!canvas) return
+    const wrapper = fullscreenRef.current
+    if (!wrapper) return
     try {
       if (document.fullscreenElement) {
         await document.exitFullscreen()
       } else {
-        await canvas.requestFullscreen()
+        await wrapper.requestFullscreen()
       }
     } catch {
       // 忽略
     }
   }
+
+  // 烟花效果：开关打开时在画面上方创建 fireworks 实例，关闭时销毁
+  useEffect(() => {
+    if (!fireworks || !fireworksRef.current) return
+    const fw = new Fireworks(fireworksRef.current, {
+      opacity: 0.5,
+      particles: 40,
+      traceLength: 3,
+      hue: { min: 0, max: 360 },
+      mouse: { click: false, move: false, max: 1 },
+      sound: { enabled: false },
+    })
+    fireworksInstanceRef.current = fw
+    fw.start()
+    return () => {
+      fw.stop(true)
+      fireworksInstanceRef.current = null
+    }
+  }, [fireworks])
+
+  // 烟花强度：实例创建后或强度变化时同步（intensity 越高发射越频繁）
+  useEffect(() => {
+    fireworksInstanceRef.current?.updateOptions({ intensity: fwIntensity })
+  }, [fwIntensity, fireworks])
 
   const download = () => {
     const canvas = canvasRef.current
@@ -479,9 +517,9 @@ export default function LoveHeartPage() {
       gap,
       offsetY,
       fontSize,
-      imgViewY,
+      imgViewYA,
+      imgViewYB,
       imgGap,
-      imgBoxX,
       imgBoxY,
       imgSize,
       imgZoomA,
@@ -646,6 +684,34 @@ export default function LoveHeartPage() {
             )}
           </div>
 
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={fireworks}
+              onChange={() => setFireworks((v) => !v)}
+              className="accent-foreground size-4"
+            />
+            烟花效果
+          </label>
+
+          {fireworks && (
+            <div>
+              <div className="mb-1 flex justify-between text-xs text-muted-foreground">
+                <span>烟花强度</span>
+                <span>{fwIntensity}</span>
+              </div>
+              <input
+                type="range"
+                min={5}
+                max={50}
+                step={1}
+                value={fwIntensity}
+                onChange={(e) => setFwIntensity(Number(e.currentTarget.value))}
+                className="w-full"
+              />
+            </div>
+          )}
+
           {mode === "names" && (
             <div className="space-y-3 pt-1">
               <div>
@@ -760,21 +826,6 @@ export default function LoveHeartPage() {
               </div>
               <div>
                 <div className="mb-1 flex justify-between text-xs text-muted-foreground">
-                  <span>水平位置</span>
-                  <span>{imgBoxX > 0 ? "+" : ""}{Math.round(imgBoxX * 100)}%</span>
-                </div>
-                <input
-                  type="range"
-                  min={-0.3}
-                  max={0.3}
-                  step={0.01}
-                  value={imgBoxX}
-                  onChange={(e) => setImgBoxX(Number(e.currentTarget.value))}
-                  className="w-full"
-                />
-              </div>
-              <div>
-                <div className="mb-1 flex justify-between text-xs text-muted-foreground">
                   <span>垂直位置</span>
                   <span>{imgBoxY > 0 ? "+" : ""}{Math.round(imgBoxY * 100)}%</span>
                 </div>
@@ -790,16 +841,31 @@ export default function LoveHeartPage() {
               </div>
               <div>
                 <div className="mb-1 flex justify-between text-xs text-muted-foreground">
-                  <span>人物居中</span>
-                  <span>{imgViewY > 0 ? "+" : ""}{Math.round(imgViewY * 100)}%</span>
+                  <span>左图人物位置</span>
+                  <span>{imgViewYA > 0 ? "+" : ""}{Math.round(imgViewYA * 100)}%</span>
                 </div>
                 <input
                   type="range"
                   min={-0.5}
                   max={0.5}
                   step={0.01}
-                  value={imgViewY}
-                  onChange={(e) => setImgViewY(Number(e.currentTarget.value))}
+                  value={imgViewYA}
+                  onChange={(e) => setImgViewYA(Number(e.currentTarget.value))}
+                  className="w-full"
+                />
+              </div>
+              <div>
+                <div className="mb-1 flex justify-between text-xs text-muted-foreground">
+                  <span>右图人物位置</span>
+                  <span>{imgViewYB > 0 ? "+" : ""}{Math.round(imgViewYB * 100)}%</span>
+                </div>
+                <input
+                  type="range"
+                  min={-0.5}
+                  max={0.5}
+                  step={0.01}
+                  value={imgViewYB}
+                  onChange={(e) => setImgViewYB(Number(e.currentTarget.value))}
                   className="w-full"
                 />
               </div>
@@ -829,7 +895,12 @@ export default function LoveHeartPage() {
         </CardHeader>
         <CardContent>
           <div className="flex justify-center rounded-lg border border-border bg-muted/30 p-3">
-            <canvas ref={canvasRef} className="h-auto max-h-[520px] max-w-full" />
+            <div ref={fullscreenRef} className="relative w-fit">
+              <canvas ref={canvasRef} className="h-auto max-h-[520px] max-w-full" />
+              {fireworks && (
+                <div ref={fireworksRef} className="pointer-events-none absolute inset-0 z-10" />
+              )}
+            </div>
           </div>
         </CardContent>
       </Card>
