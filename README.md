@@ -38,6 +38,7 @@ xattr -cr /Applications/yqy7-tools.app/
 | 图片打码 | [查看](https://yqy7.github.io/#/tools/blur) |
 | 图片切割 | [查看](https://yqy7.github.io/#/tools/slice) |
 | ASCII 画 | [查看](https://yqy7.github.io/#/tools/ascii-art) |
+| 爱心生成 | [查看](https://yqy7.github.io/#/tools/love-heart) |
 | 简繁转换 | [查看](https://yqy7.github.io/#/tools/opencc) |
 | 汉字转拼音 | [查看](https://yqy7.github.io/#/tools/pinyin) |
 | 中文数字转换 | [查看](https://yqy7.github.io/#/tools/chinese-number) |

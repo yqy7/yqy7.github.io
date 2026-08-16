@@ -157,6 +157,12 @@ const tools = [
     icon: "👾",
   },
   {
+    to: "/tools/love-heart",
+    title: "爱心生成",
+    desc: "生成爱心图片，心内可放两个名字或两张照片，支持心跳动画",
+    icon: "💖",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",
