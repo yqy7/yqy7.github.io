@@ -51,6 +51,7 @@ import BlurPage from '@/tools/blur/index.tsx'
 import SlicePage from '@/tools/slice/index.tsx'
 import AsciiArtPage from '@/tools/ascii-art/index.tsx'
 import LoveHeartPage from '@/tools/love-heart/index.tsx'
+import PaperTexturePage from '@/tools/paper-texture/index.tsx'
 
 const router = createHashRouter([
   {
@@ -236,6 +237,10 @@ const router = createHashRouter([
       {
         path: "/tools/love-heart",
         element: <LoveHeartPage />,
+      },
+      {
+        path: "/tools/paper-texture",
+        element: <PaperTexturePage />,
       },
     ],
   },

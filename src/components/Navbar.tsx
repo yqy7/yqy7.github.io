@@ -39,6 +39,7 @@ const toolsLinks = [
   { to: "/tools/slice", label: "图片切割" },
   { to: "/tools/ascii-art", label: "ASCII 画" },
   { to: "/tools/love-heart", label: "爱心生成" },
+  { to: "/tools/paper-texture", label: "纸质纹理" },
   { to: "/tools/opencc", label: "简繁转换" },
   { to: "/tools/pinyin", label: "汉字转拼音" },
   { to: "/tools/chinese-number", label: "中文数字" },

@@ -163,6 +163,12 @@ const tools = [
     icon: "💖",
   },
   {
+    to: "/tools/paper-texture",
+    title: "纸质纹理",
+    desc: "上传图片叠加纸质纹理做旧，支持调节纹理强度、泛黄、噪点和暗角",
+    icon: "📜",
+  },
+  {
     to: "/tools/opencc",
     title: "简繁转换",
     desc: "简体中文与繁体中文（台湾、香港）相互转换",
